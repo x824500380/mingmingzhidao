@@ -21,7 +21,7 @@ from os import environ
 debug = not environ.get("APP_NAME", "")   
 if debug:  
 
-    MYSQL_DB = 'bdlibsaas'      
+    MYSQL_DB = 'mingmingzhidao'      
     MYSQL_USER = 'root'   
     MYSQL_PASS = 'root'   
     MYSQL_HOST_M = '127.0.0.1'   
