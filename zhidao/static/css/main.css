@@ -103,7 +103,7 @@
 		-ms-justify-content: center;
 		justify-content: center;
 		background-color: #000;
-		padding: 6em 4em 4em 4em;
+		padding: 0em 4em 4em 4em;
 	}
 
 		body > * {
@@ -125,7 +125,7 @@
 		@media screen and (max-width: 1680px) {
 
 			body {
-				padding: 6em 3.5em 3.5em 3.5em;
+				padding: 4em 3.5em 3.5em 3.5em;
 			}
 
 		}
@@ -468,7 +468,9 @@
 	section.special, article.special {
 		text-align: center;
 	}
-
+	header {
+		margin: 0 0 0 0;
+	}
 	header p {
 		color: rgba(255, 255, 255, 0.5);
 		position: relative;
@@ -539,7 +541,9 @@
 		.icon > .label {
 			display: none;
 		}
-
+		.pro {
+			margin:0 0 0 90%;
+		}
 /* List */
 
 	ol {
