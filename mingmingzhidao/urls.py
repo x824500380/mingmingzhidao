@@ -19,5 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'zhidao.views.index'),
+    url(r'^search$', 'zhidao.views.search'),
+    url(r'^login$', 'zhidao.views.login'),
 
 ]

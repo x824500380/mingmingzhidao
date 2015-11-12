@@ -39,9 +39,11 @@
 
 					// Images (in the format of 'url': 'alignment').
 						images: {
-							'./static/images/bg01.jpg': 'center',
-							'./static/images/bg02.jpg': 'center',
-							'./static/images/bg03.jpg': 'center'
+							'./static/images/bg05.jpg': 'center',
+							'./static/images/bg11.jpg': 'center',
+							'./static/images/bg10.jpg': 'center',
+							'./static/images/bg08.jpg': 'center',
+							'./static/images/bg09.jpg': 'center'
 						},
 
 					// Delay.
@@ -105,7 +107,7 @@
 		})();
 
 	// Signup Form.
-		(function() {
+		/*(function() {
 
 			// Vars.
 				var $form = document.querySelectorAll('#signup-form')[0],
@@ -170,5 +172,5 @@
 				});
 
 		})();
-
+*/
 })();
