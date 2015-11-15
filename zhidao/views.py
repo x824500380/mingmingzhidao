@@ -6,15 +6,15 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 import re
 import sys
-
+from lxml import etree
 def index(request):
 	return render_to_response('index.html')
 @csrf_exempt
 def search(request):
 	url="http://zhidao.baidu.com/search?word="+request.POST["question"]
 	html = requests.get(url)
-	
-	
-	return render_to_response('search.html',{"html":html.text})
+	text = etree.HTML(html)
+	aim =selector.xpath('//*[@id="wgt-list"]/dl[1]/dt/a/text()')	
+	return render_to_response('search.html',{"html":aim})
 def login(request):
 	return render_to_response('login.html')
