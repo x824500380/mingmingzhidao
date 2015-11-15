@@ -14,7 +14,7 @@ def search(request):
 	url="http://zhidao.baidu.com/search?word="+request.POST["question"]
 	html = requests.get(url)
 	selector = etree.HTML(html.text)
-	aim =selector.xpath('//*[@id="wgt-list"]/dl[1]/dt/a/text()')	
-	return render_to_response('search.html',{"html":aim})
+	aim =selector.xpath('//*[@id="wgt-list"]/dl[2]/dt/a/text()')	
+	return render_to_response('search.html',{"html":aim[0].encode('utf-8').decode('gbk')})
 def login(request):
 	return render_to_response('login.html')
