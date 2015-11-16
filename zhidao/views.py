@@ -13,6 +13,7 @@ def index(request):
 def search(request):
 	url="http://zhidao.baidu.com/search?word="+request.POST["question"]
 	html = requests.get(url)
+	html.encoding='gbk'
 	selector = etree.HTML(html.text)
 	aim =selector.xpath('//*[@id="wgt-list"]/dl[2]/dt/a/text()')	
 	return render_to_response('search.html',{"html":aim[0].encode('utf-8').decode('gbk')})
