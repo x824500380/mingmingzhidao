@@ -16,6 +16,6 @@ def search(request):
 	html.encoding='gbk'
 	selector = etree.HTML(html.text)
 	aim =selector.xpath('//*[@id="wgt-list"]/dl[2]/dt/a/text()')	
-	return render_to_response('search.html',{"html":aim[0].encode('utf-8').decode('gbk')})
+	return render_to_response('search.html',{"html":aim[0])})
 def login(request):
 	return render_to_response('login.html')
