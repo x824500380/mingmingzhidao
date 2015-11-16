@@ -1,4 +1,30 @@
-{% autoescape off %}
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>明明KNOWS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="./static/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./static/css/main.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<!--[if lte IE 8]><link rel="stylesheet" href="./static/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="./static/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<div class="pro">
+				<a href="./login"><span class="glyphicon glyphicon-user"></span></a>
+			</div>
+			
+		<!-- Signup Form -->
+			{% autoescape off %}
 	{%for line in html%}
 		<a href={{line.link}}>{{line.title}}</a>
 		<br>
@@ -14,3 +40,11 @@
 		<hr>
 	{%endfor%}
 {% endautoescape %}
+		<!-- Footer -->
+			
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="./static/js/ie/respond.min.js"></script><![endif]-->
+			<script src="./static/js/main.js"></script>
+
+	</body>
+</html>
