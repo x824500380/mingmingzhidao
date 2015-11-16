@@ -1,1 +1,4 @@
-{% autoescape off %}{{html}}{% endautoescape %}
+{% autoescape off %}{%for line in html%}{{line}}{%endfor%}
+
+
+{% endautoescape %}
