@@ -1,4 +1,4 @@
-{% autoescape off %}{%for line in html%}{{line}}{%endfor%}
+{% autoescape off %}{%for line in html%}{{forloop.count}}{{line}}<hr>{%endfor%}
 
 
 {% endautoescape %}
