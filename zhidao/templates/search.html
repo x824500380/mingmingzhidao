@@ -1,4 +1,16 @@
-{% autoescape off %}{%for line in html%}{{forloop.count}}{{line}}<hr>{%endfor%}
-
-
+{% autoescape off %}
+	{%for line in html%}
+		<a href={{line.link}}>{{line.title}}</a>
+		<br>
+		<h4>描述</h4>
+			{%if line.question%}
+				{{line.question}}
+			{%else%}
+				<em>no description</em>
+			{%endif%}
+		<br>
+		<h4>回答</h4>
+			{{line.answer}}
+		<hr>
+	{%endfor%}
 {% endautoescape %}
