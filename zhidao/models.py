@@ -57,8 +57,8 @@ class dbSpider:
 		self.link = link
 		self.question = question
 		self.answers=[]
-	    self.bestanswer = []
-	    self.username = username
+		self.bestanswer = []
+		self.username = username
 	def handleanswer(answer):
 		if answer.is_best:
 			self.bestanswer.append(answer)
