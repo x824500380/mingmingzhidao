@@ -16,7 +16,16 @@
 
 		<!-- Header -->
 			<div class="pro">
-				<a href="./login"><span class="glyphicon glyphicon-user"></span></a>
+					{% if user.is_authenticated %} 
+					<span class="glyphicon glyphicon-user">
+                    <span>{{ user }}</span>
+                    <div><a href="./logout"><span>退出</span></a>
+                    <a href=""><span>个人中心</span></a>
+                    </div>
+                    {% else %} 
+                    <a href="./login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请登录</span>
+                    {% endif %}				
 			</div>
 			<header id="header">
 				<h1>明明Knows</h1>

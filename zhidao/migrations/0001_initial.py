@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -10,6 +11,25 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(null=True, verbose_name='last login', blank=True)),
+                ('name', models.CharField(unique=True, max_length=100)),
+                ('email', models.EmailField(unique=True, max_length=100)),
+                ('date_of_birth', models.DateField(null=True, blank=True)),
+                ('gender', models.IntegerField(default=1)),
+                ('is_active', models.BooleanField(default=True)),
+                ('is_admin', models.BooleanField(default=False)),
+                ('address', models.CharField(max_length=140, null=True, blank=True)),
+                ('information', models.TextField()),
+            ],
+            options={
+                'abstract': False,
+            },
+        ),
         migrations.CreateModel(
             name='answer',
             fields=[
@@ -25,23 +45,8 @@ class Migration(migrations.Migration):
                 ('Title', models.CharField(max_length=100)),
                 ('KeyWords', models.CharField(max_length=100)),
                 ('Description', models.TextField()),
+                ('UserID', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
-        ),
-        migrations.CreateModel(
-            name='user',
-            fields=[
-                ('Name', models.CharField(unique=b'True', max_length=30)),
-                ('ID', models.AutoField(serialize=False, primary_key=True)),
-                ('Gender', models.BooleanField(choices=[(b'F', b'Female'), (b'M', b'Male')])),
-                ('Birthday', models.DateField()),
-                ('Email', models.EmailField(max_length=100)),
-                ('Passwords', models.CharField(max_length=30)),
-            ],
-        ),
-        migrations.AddField(
-            model_name='question',
-            name='UserID',
-            field=models.ForeignKey(to='zhidao.user'),
         ),
         migrations.AddField(
             model_name='answer',
@@ -51,6 +56,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answer',
             name='UserID',
-            field=models.ForeignKey(to='zhidao.user'),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]

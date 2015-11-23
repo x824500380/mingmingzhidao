@@ -1,17 +1,22 @@
 #-*- coding:utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import *
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from zhidao.models import question,answer,user,spider,Answer,dbSpider
-
+from django.contrib import auth
+from zhidao.models import *
 import requests
 import re
 import sys
+from zhidao.forms import *
 from lxml import etree
+from django.contrib.auth import *
+from django.template.context_processors import csrf
+from django import forms
+
 
 def index(request):
-	return render_to_response('index.html')
+	return render_to_response('index.html',{'user':request.user})
 @csrf_exempt
 def search(request):
 	url="http://zhidao.baidu.com/search?word="+request.POST["question"]
@@ -64,5 +69,57 @@ def search(request):
 
 	
 	return render_to_response('search.html',{"html":WebSpider.list,"question1":dbQuestionList})
+@csrf_exempt
 def login(request):
-	return render_to_response('login.html')
+	if request.method == "POST":
+		loginform = LoginForm(request.POST)
+		registerform = RegistrationForm()
+		if loginform.is_valid():
+			user = authenticate(email = loginform.cleaned_data['email'], password = loginform.cleaned_data['password'])
+			if user is not None:
+				if user.is_active:
+					auth.login(request,user)
+					return render_to_response('index.html',{'user':user})
+	else:
+		loginform = LoginForm()
+        registerform = RegistrationForm()
+	return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})			
+@csrf_exempt
+def register(request):
+	if request.method == "POST":
+		registerform = RegistrationForm(request.POST)
+		loginform = LoginForm()
+		if  registerform.is_valid():
+			user = User.objects.create_user(name = registerform.cleaned_data['username'],email = registerform.cleaned_data['email'],password = registerform.cleaned_data['password2'])
+			user.save()
+			return render_to_response('index.html')
+	else:
+		loginform = LoginForm()
+		registerform = RegistrationForm()
+	return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})
+def logout(request):
+	auth.logout(request)
+	return HttpResponseRedirect("/index")
+@csrf_exempt
+def changepwd(request):
+	if request.method == "POST":
+		changepwdform = ChangepwdForm(request.POST)
+		if changepwdform.is_valid():
+			email = request.user.email
+			oldpwd = changepwdform.cleaned_data['oldpassword']
+			user = authenticate(email = email, password = oldpwd)
+
+			if user is not None and user.is_active:
+				newpwd = changepwdform.cleaned_data['newpassword2']
+				user.set_password(newpwd)
+				user.save()
+				return render_to_response('index.html',{'user':user})
+			else:
+				return render_to_response('changepwd.html',{'changepwdform':changepwdform,'is_oldpwd_wrong':True})
+	else:
+		changepwdform = ChangepwdForm()
+		return render_to_response('changepwd.html',{'changepwdform':changepwdform})
+#def inforupdate(request):
+	
+
+
