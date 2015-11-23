@@ -52,7 +52,8 @@ class Answer:
 		self.Username = Username
 		self.is_best = is_best
 class dbSpider:
-	def __init__(self,title,link,question,username):
+	def __init__(self,title,link,question,username,ID):
+		self.ID=ID
 		self.title = title
 		self.link = link
 		self.question = question

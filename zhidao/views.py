@@ -55,7 +55,7 @@ def search(request):
 	dbQuestionList=[]#存储格式化后的数据库问题
     
 	for Q in question_list:
-		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.Name)
+		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.Name,Q.ID)
 		Aorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
 		for item in Aorial:
 			Formalanswer = Answer(item.ID,item.Content,item.UserID.Name,item.is_best)
