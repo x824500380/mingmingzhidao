@@ -45,12 +45,15 @@
 				                <div>
 				                	<h4>回答</h4>
 				                	{% for item in sa.bestanswer %}
+				                	<h4>最佳答案</h4>
 								    <h5>{{item.Content}}</h5><hr>
 								    {% empty %}
 								    <h4>No Best Answer</h4>
 				                	{% endfor %}
 				                	{% for item in sa.answers %}
+				                	<h4>其他回答</h4>
 								    <h5>{{item.Content}}</h5><hr>
+
 								    {% empty %}
 								    <h4>No Answer</h4>
 				                	{% endfor %}
