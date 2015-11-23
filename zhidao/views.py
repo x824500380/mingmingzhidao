@@ -32,6 +32,12 @@ def search(request):
 	webquestion =selector.xpath('//*[@id="wgt-list"]/dl/dd[@class="dd summary"]')#question
 	webanswer =selector.xpath('//*[@id="wgt-list"]/dl/dd[@class="dd answer"]')#answer
 
+	webdl =selector.xpath('//*[@id="wgt-list"]/dl')#title
+	dllength=[]
+	for dl in webdl:
+		length = len(dl)
+		dllength.append(length)
+	
 	for T in webtitle:
 		info = T.xpath('string(.)')
 		WebSpider.SpiderTitle(info)
@@ -42,9 +48,14 @@ def search(request):
 		qNumber+=1
 
 	qNumber =0
-	for Q in webquestion:
-		info = Q.xpath('string(.)')
-		WebSpider.SpiderQuestion(info,qNumber)
+	webqNumber = 0
+	for Q in weblink:
+		if dllength[qNumber] == 4:
+			info = webquestion[webqNumber].xpath('string(.)')
+			WebSpider.SpiderQuestion(info,qNumber)
+			webqNumber+=1
+		else:
+			WebSpider.SpiderQuestion('',qNumber)
 		qNumber+=1
 
 	qNumber = 0
@@ -60,15 +71,15 @@ def search(request):
 	dbQuestionList=[]#存储格式化后的数据库问题
     
 	for Q in question_list:
-		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.name,Q.ID)
+		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.Name,Q.ID)
 		Aorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
 		for item in Aorial:
-			Formalanswer = Answer(item.ID,item.Content,item.UserID.name,item.is_best)
+			Formalanswer = Answer(item.ID,item.Content,item.UserID.Name,item.is_best)
 			Formalquestion.handleanswer(Formalanswer)
 		dbQuestionList.append(Formalquestion)
 
 	
-	return render_to_response('search.html',{"html":WebSpider.list,"question1":dbQuestionList})
+	return render_to_response('search.html',{"html":WebSpider.list,"question1":dbQuestionList,"ss":dllength})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
