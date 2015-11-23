@@ -51,12 +51,18 @@ def search(request):
 
 	title = request.POST['question']
 	question_list = question.objects.filter(Title__icontains=title)#获得数据库里的原始问题数据
-	dbQuestionList=[]#存储格式化后的数据库问题
-	for Q in question_list:
-		Qorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
 
+	dbQuestionList=[]#存储格式化后的数据库问题
+    
+	for Q in question_list:
+		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.Name)
+		Aorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
+		for item in Aorial:
+			Formalanswer = Answer(item.ID,item.Content,item.UserID.Name)
+			Formalquestion.handleanswer(Formalanswer)
+		dbQuestionList.append(Formalquestion)
 
 	
-	return render_to_response('search.html',{"html":WebSpider.list,"question1":question_list})
+	return render_to_response('search.html',{"html":WebSpider.list,"question1":dbQuestionList})
 def login(request):
 	return render_to_response('login.html')

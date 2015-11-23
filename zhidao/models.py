@@ -23,12 +23,7 @@ class answer(models.Model):
 	is_best = models.BooleanField()
 	UserID = models.ForeignKey("user")
 
-class Answer:
-	def __init__(self):
-		self.ID=''
-		self.Content=''
-		self.UserID=''
-		
+
 
 class spider:
 	def __init__(self):
@@ -50,10 +45,24 @@ class spider:
 		self.list[numb].question=question
 	def SpiderAnswer(self,answer,numb):
 		self.list[numb].answer=answer
+class Answer:
+	def __init__(self,ID,Content,Username,is_best):
+		self.ID = ID
+		self.Content = Content
+		self.Username = Username
+		self.is_best = is_best
 class dbSpider:
-	def __init__(self):
-		self.title=''
-		self.link=''
-		self.question=''
-		self.answer=[]
-		
+	def __init__(self,title,link,question,username):
+		self.title = title
+		self.link = link
+		self.question = question
+		self.answers=[]
+	    self.bestanswer = []
+	    self.username = username
+	def handleanswer(answer):
+		if answer.is_best:
+			self.bestanswer.append(answer)
+		else:
+			self.answers.append(answer)
+
+
