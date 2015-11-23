@@ -59,7 +59,7 @@ class dbSpider:
 		self.answers=[]
 		self.bestanswer = []
 		self.username = username
-	def handleanswer(answer):
+	def handleanswer(self,answer):
 		if answer.is_best:
 			self.bestanswer.append(answer)
 		else:
