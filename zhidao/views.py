@@ -20,7 +20,7 @@ def index(request):
 @csrf_exempt
 def search(request):
 	
-	url="http://zhidao.baidu.com/search?word="+request.POST["question"]+"&ie=gbk&site=-1&sites=0&date=0&pn=0"
+	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+request.POST["question"]
 	html = requests.get(url)
 	html.encoding='gbk'
 
