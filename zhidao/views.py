@@ -8,6 +8,7 @@ from zhidao.models import *
 import requests
 import re
 import sys
+import urllib
 from zhidao.forms import *
 from lxml import etree
 from django.contrib.auth import *
@@ -19,8 +20,8 @@ def index(request):
 	return render_to_response('index.html',{'user':request.user})
 @csrf_exempt
 def search(request):
-	
-	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+request.POST["question"]
+	find=urllib.quote(request.POST["question"])
+	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+find
 	html = requests.get(url)
 	html.encoding='gbk'
 
