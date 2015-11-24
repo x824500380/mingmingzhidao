@@ -19,7 +19,8 @@ def index(request):
 	return render_to_response('index.html',{'user':request.user})
 @csrf_exempt
 def search(request):
-	url="http://zhidao.baidu.com/search?word="+request.POST["question"]
+	
+	url="http://zhidao.baidu.com/search?word="+request.POST["question"]+"&ie=gbk&site=-1&sites=0&date=0&pn=0"
 	html = requests.get(url)
 	html.encoding='gbk'
 
