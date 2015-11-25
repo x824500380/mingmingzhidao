@@ -24,15 +24,19 @@ html  body {
 }
 #myTab {
 	margin: 120px auto auto auto;
-	width: 75%;
+	width: 80%;
 	border-style: solid;
 	border-color: rgba(154,183,172,0.3);
 	border-width: 5px;
 }
 #myTabContent{
 	margin: auto; 
-	width: 75%;
+	width: 80%;
 	border-style: none solid solid solid;
 	border-color: rgba(154,183,172,0.3);
 	border-width: 5px;
+}
+.form-group{
+	width: 100%;
+	margin-left: 50%;
 }

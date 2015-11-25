@@ -81,7 +81,7 @@ def search(request):
 		dbQuestionList.append(Formalquestion)
 
 	
-	return render_to_response('search.html',{"html":WebSpider.list,"question1":dbQuestionList,"ss":dllength})
+	return render_to_response('search.html',{"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList,"ss":dllength})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
