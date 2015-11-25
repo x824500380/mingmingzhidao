@@ -43,6 +43,9 @@ form{
 	padding-left: 25px;
 	padding-top: 10px;
 }
+input{
+	width: 100%;
+}
 .form-group{
 	width: 70%;
 	border-width: 1px;
