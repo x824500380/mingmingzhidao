@@ -1,3 +1,6 @@
+*{
+	margin: 0;
+}
 html  body {
 	height: 100%;
 	margin: 0;
@@ -23,16 +26,29 @@ html  body {
 	float: center;
 }
 #myTab {
-	margin: 150px auto auto auto;
-	width: 75%;
+	margin: 120px auto auto auto;
+	width: 80%;
 	border-style: solid;
 	border-color: rgba(154,183,172,0.3);
 	border-width: 5px;
 }
 #myTabContent{
 	margin: auto; 
-	width: 75%;
+	width: 80%;
 	border-style: none solid solid solid;
 	border-color: rgba(154,183,172,0.3);
 	border-width: 5px;
+}
+form{
+	padding-left: 25px;
+	padding-top: 10px;
+}
+.form-group{
+	width: 70%;
+	border-width: 1px;
+	margin:auto;
+	padding: 0;
+}
+.group-btn{
+	width: 260px;
 }

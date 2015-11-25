@@ -41,12 +41,14 @@ html  body {
 }
 form{
 	padding-left: 25px;
+	padding-top: 10px;
 }
 .form-group{
 	width: 70%;
-	border-style: solid;
-	border-color: red;
 	border-width: 1px;
-	margin:auto auto;
+	margin:auto;
 	padding: 0;
+}
+.group-btn{
+	width: 260px;
 }
