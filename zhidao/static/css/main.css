@@ -1,4 +1,7 @@
-
+html  body {
+	height: 100%;
+	margin: 0;
+}
 .main{
 	position: relative;
 	
@@ -18,4 +21,18 @@
 .mid-form {
 	position: relative;
 	float: center;
+}
+#myTab {
+	margin: 150px auto auto auto;
+	width: 75%;
+	border-style: solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
+}
+#myTabContent{
+	margin: auto; 
+	width: 75%;
+	border-style: none solid solid solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
 }

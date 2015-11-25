@@ -1,6 +1,6 @@
-
-*{
-	margin: 0px;
+html  body {
+	height: 100%;
+	margin: 0;
 }
 .main{
 	position: relative;
@@ -8,82 +8,31 @@
 	height: 100%;
 	width: 100%;
 }
-@media screen and (min-width: 1200px) { 
-
-/* css注释：设置了浏览器宽度不小于1201px时 abc 显示1200px宽度 */ 
-.mid-title {
-	position: absolute;
+.mid{
+	position: relative;
 	height: 100%;
-	width: 95%;
-	margin-top: 10%;
+	margin-top:12%;
+	width: 90%
+}
+.mid-title {
+	position: relative;
+	float: center;
 }
 .mid-form {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 20%;
+	position: relative;
+	float: center;
 }
+#myTab {
+	margin: 150px auto auto auto;
+	width: 75%;
+	border-style: solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
 }
-@media screen and (max-width: 1200px) { 
-
-/* css注释：设置了浏览器宽度不小于1201px时 abc 显示1200px宽度 */ 
-.mid-title {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 10%;
+#myTabContent{
+	margin: auto; 
+	width: 75%;
+	border-style: none solid solid solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
 }
-.mid-form {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 20%;
-}
-}
-
-@media screen and (max-width: 900px) { 
-/* 设置了浏览器宽度不大于1200px时 abc 显示900px宽度 */ 
-.mid-title {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 10%;
-}
-.mid-form {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 20%;
-}
-}
-
-@media screen and (max-width: 700px) { 
-.mid-title {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 10%;
-}
-.mid-form {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 20%;
-}
-} 
-/* 设置了浏览器宽度不大于901px时 abc 显示200px宽度 */ 
-
-@media screen and (max-width: 480px) { 
-.mid-title {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 17%;
-}
-.mid-form {
-	position: absolute;
-	height: 100%;
-	width: 95%;
-	margin-top: 45%;
-}
-} 

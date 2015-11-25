@@ -7,56 +7,44 @@
 		<!--[if lte IE 8]><script src="./static/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="./static/css/log.css">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript" src="./static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="./static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./static/js/bootstrap-collapse.js"></script>
         
 		<!--[if lte IE 8]><link rel="stylesheet" href="./static/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="./static/css/ie9.css" /><![endif]-->
 		
 	</head>
 	<body>
+		<div class="main">
+			<ul id="myTab" class="nav nav-tabs">
+			   <li class="active">
+			      <a href="#login" data-toggle="tab">
+			         log in
+			      </a>
+			   </li>
+			   <li><a href="#register" data-toggle="tab">register</a></li>
+			   <li id="return"><a href="../" >return</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+			   <div class="tab-pane fade in active" id="login">
+			      <form id="login" method="post" action="/login">
+					{{loginform}}				
+					<input class="btn btn-info"type="submit" value="Gogogogo！">
+				  </form>
+			   </div>
+			   <div class="tab-pane fade" id="register">
 
-		<!-- Header -->
-			<div class="pro">
-				<a href="./login"><span class="glyphicon glyphicon-user"></span></a>
+			      <form id="register" method="post" action="/register">
+					{{registerform}}
+					<input class="btn btn-info"type="submit" value="Gogogogo!">
+				  </form>
+				  
+			   </div>
 			</div>
-			<header id="header">
-				<div class="container-fluid">
-				     <div class="accordion" id="accordion2">
-				            <div class="accordion-group">
-				              <div class="accordion-heading">
-				                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-				                 Log in
-				                </a>
-				              </div>
-				              <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
-				                <div class="accordion-inner">
-				                  <form id="login" method="post" action="/login">
-				                  	
-				                  	{{loginform}}				
-				                  	<input type="submit" value="Gogogogo！">
-				                  </form>
-				                </div>
-				              </div>
-				            </div>
-				            <div class="accordion-group">
-				              <div class="accordion-heading">
-				                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-				                 Register
-				                </a>
-				              </div>
-				              <div id="collapseTwo" class="accordion-body collapse">
-				                <div class="accordion-inner">
-				               
-				                 <form id="register" method="post" action="/register">
-				                    {{registerform}}
-				                  	<input type="submit" value="Gogogogo!">
-				                  </form>
-				                </div>
-				              </div>
-				            </div>
-				     </div>
-				</div>
-			</header>
+		</div>
 
 		<!-- Signup Form -->
 			
@@ -67,11 +55,6 @@
 			    <span class="glyphicon glyphicon-briefcase"></span><span>:powered by MM团队</span></div>
 			    
 			</footer>
-		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="./static/js/ie/respond.min.js"></script><![endif]-->
-			<script src="./static/js/main.js"></script>
-			<script type="text/javascript" src="./static/js/bootstrap-collapse.js"></script>
-			<script type="text/javascript" src="./static/js/jquery.js"></script>
-
+			
 	</body>
 </html>
