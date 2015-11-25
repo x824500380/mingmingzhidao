@@ -17,19 +17,19 @@ from django.core.exceptions import *
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(label=u"用户名",max_length=30,widget=forms.TextInput(
-        attrs={'class':'input col-xs-12','placeholder': u'用户名', 'required': ''}
+        attrs={'class':'input','placeholder': u'用户名', 'required': ''}
     ),
 )
     email = forms.EmailField(label=u'Email', max_length=100, widget=forms.TextInput(
-        attrs={ 'class':'input col-xs-12','placeholder': u'Email', 'required': ''}
+        attrs={ 'class':'input','placeholder': u'Email', 'required': ''}
     ),
 )
     password1 = forms.CharField(label=u'密码',widget=forms.PasswordInput(
-        attrs={'class':'input col-xs-12','placeholder': u'密码', 'required': ''}
+        attrs={'class':'input','placeholder': u'密码', 'required': ''}
     ),
 )
     password2 = forms.CharField(label=u'密码(重复)',widget=forms.PasswordInput(
-        attrs={ 'class':'input col-xs-12','placeholder': u'重复密码', 'required': ''}
+        attrs={ 'class':'input','placeholder': u'重复密码', 'required': ''}
     )
 )
     def clean_username(self):
@@ -62,11 +62,11 @@ class RegistrationForm(forms.Form):
             raise forms.ValidationError('两次输入的密码不匹配')
 class LoginForm(forms.Form):
     email = forms.EmailField(label=u'邮箱',max_length=100,widget=forms.TextInput(
-        attrs={'class':'input col-xs-12','placeholder': u'邮箱', 'required': ''}
+        attrs={'class':'input','placeholder': u'邮箱', 'required': ''}
     ),
 )
     password = forms.CharField(label=u'密码',widget=forms.PasswordInput(
-        attrs={'class':'input col-xs-12','required': '','placeholder': u'密码'}
+        attrs={'class':'input','required': '','placeholder': u'密码'}
     ),
 )
     def clean(self):
@@ -80,15 +80,15 @@ class LoginForm(forms.Form):
         return self.cleaned_data
 class ChangepwdFrom(forms.Form):
     oldpassword = forms.CharField(label=u'原密码',widget=forms.PasswordInput(
-        attrs={'class':'input','required': ''}
+        attrs={'class':'form-control','required': ''}
     ),
 )
     newpassword1 = forms.CharField(label=u'新密码',widget=forms.PasswordInput(
-        attrs={'class':'input','required': ''}
+        attrs={'class':'form-control','required': ''}
     ),
 )
     newpassword2 = forms.CharField(label=u'确认密码',widget=forms.PasswordInput(
-        attrs={'class':'input','required': ''}
+        attrs={'class':'form-control','required': ''}
     ),
 )
     def clean_newpwd(self):

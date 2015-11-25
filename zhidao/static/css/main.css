@@ -1,3 +1,6 @@
+*{
+	margin: 0;
+}
 html  body {
 	height: 100%;
 	margin: 0;
@@ -36,7 +39,14 @@ html  body {
 	border-color: rgba(154,183,172,0.3);
 	border-width: 5px;
 }
+form{
+	padding-left: 25px;
+}
 .form-group{
-	width: 100%;
-	margin-left: 50%;
+	width: 70%;
+	border-style: solid;
+	border-color: red;
+	border-width: 1px;
+	margin:auto auto;
+	padding: 0;
 }
