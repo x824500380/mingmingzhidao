@@ -30,16 +30,20 @@
 			</ul>
 			<div id="myTabContent" class="tab-content">
 			   <div class="tab-pane fade in active" id="login">
-			      <form id="login" method="post" action="/login">
+			      <form class="form-horizontal"id="login" method="post" action="/login">
+			      <div class="form-group">
 					{{loginform}}				
 					<input class="btn btn-info"type="submit" value="Gogogogo！">
+				</div>
 				  </form>
 			   </div>
 			   <div class="tab-pane fade" id="register">
 
-			      <form id="register" method="post" action="/register">
+			      <form class="form-horizontal" id="register" method="post" action="/register">
+			      <div class="form-group">
 					{{registerform}}
 					<input class="btn btn-info"type="submit" value="Gogogogo!">
+				</div>
 				  </form>
 				  
 			   </div>
@@ -49,12 +53,7 @@
 		<!-- Signup Form -->
 			
 		<!-- Footer -->
-			<footer class="footer navbar-fixed-bottom ">
-			   
-			    <hr> <div class="container">
-			    <span class="glyphicon glyphicon-briefcase"></span><span>:powered by MM团队</span></div>
-			    
-			</footer>
+			
 			
 	</body>
 </html>
