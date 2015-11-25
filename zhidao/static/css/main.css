@@ -8,20 +8,20 @@
 	height: 100%;
 	width: 100%;
 }
-@media screen and (min-width: 1200px) { 
+@media screen and (max-width: 1400px) { 
 
 /* css注释：设置了浏览器宽度不小于1201px时 abc 显示1200px宽度 */ 
 .mid-title {
 	position: absolute;
 	height: 100%;
 	width: 95%;
-	margin-top: 10%;
+	margin-top: 7%;
 }
 .mid-form {
 	position: absolute;
 	height: 100%;
 	width: 95%;
-	margin-top: 20%;
+	margin-top: 16%;
 }
 }
 @media screen and (max-width: 1200px) { 
@@ -53,7 +53,7 @@
 	position: absolute;
 	height: 100%;
 	width: 95%;
-	margin-top: 20%;
+	margin-top: 24%;
 }
 }
 
@@ -68,7 +68,7 @@
 	position: absolute;
 	height: 100%;
 	width: 95%;
-	margin-top: 20%;
+	margin-top: 28%;
 }
 } 
 /* 设置了浏览器宽度不大于901px时 abc 显示200px宽度 */ 
@@ -85,5 +85,19 @@
 	height: 100%;
 	width: 95%;
 	margin-top: 45%;
+}
+} 
+@media screen and (max-width: 390px) { 
+.mid-title {
+	position: absolute;
+	height: 100%;
+	width: 95%;
+	margin-top: 17%;
+}
+.mid-form {
+	position: absolute;
+	height: 100%;
+	width: 95%;
+	margin-top: 55%;
 }
 } 
