@@ -74,11 +74,11 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         if not User.objects.filter(email = email).exists():
             raise forms.ValidationError(u'该用户不存在')
-        self.user_cache = authenticate(email = email,password = password)
-        if self.user_cache is None:
-            raise forms.ValidationError(u'邮箱或密码错误')
+        user_cache = authenticate(email = email,password = password)
+        if user_cache is None:
+            raise forms.ValidationError(u'密码错误')
         return self.cleaned_data
-class ChangepwdFrom(forms.Form):
+class ChangepwdForm(forms.Form):
     oldpassword = forms.CharField(label=u'原密码',widget=forms.PasswordInput(
         attrs={'class':'form-control','required': ''}
     ),
@@ -91,13 +91,28 @@ class ChangepwdFrom(forms.Form):
         attrs={'class':'form-control','required': ''}
     ),
 )
-    def clean_newpwd(self):
+    def clean_oldpassword(self):
+        pass
+    def clean_newpassword2(self):
         if 'newpassword1' in self.cleaned_data:
             newpassword1 = self.cleaned_data['newpassword1']
             newpassword2 = self.cleaned_data['newpassword2']
             if newpassword1 == newpassword2:
                 return self.cleaned_data
             raise forms.ValidationError('两次输入的密码不匹配')
-class InformationFrom(forms.Form):
-    pass
+class InformationForm(forms.Form):
+    SEX_CHOICES = (
+    ('0','男'),
+    ('1','女'),
+)
+    gender = forms.ChoiceField(choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'})
+    birthday = forms.DateField(input_formats=['%Y-%m-%d',],error_messages={'invalid':'请输入正确格式的日期'})
+    address = forms.CharField(label=u"地址",max_length=100,widget=forms.TextInput(
+        attrs={'placeholder': u'地址', }
+    ),
+)
+    information = forms.CharField(label=u"个人简介",max_length=400,widget=forms.TextInput(
+        attrs={'placeholder': u'个人简介', }
+    ),
+)
 

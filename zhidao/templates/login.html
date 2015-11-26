@@ -31,12 +31,14 @@
 			   <div class="tab-pane fade in active " id="login">
 			      <form class="form-horizontal login"id="login" method="post" action="/login" role="form">
 			      <div class="form-group container">
+			      
 			      {% for field in  loginform%}
 			      <div class="row">
 					<label for = '{{field.id_for_label}}' class ="control-label col-xs-4">{{field.label}}</label>
-					<div class="col-xs-8">{{field}}</div>
+					<div class="col-xs-8">{{field}}</div>	
 				</div>
-			      {% endfor %}				
+			      {% endfor %}		
+			      <div class="col-xs-8">{{loginform.non_field_errors}}</div>		
 					<div class="row">
 					<input class="btn group-btn  col-xs-push-4 col-xs-8 col-sm-push-4 col-sm-8 col-md-push-4 col-md-8 col-lg-push-4 col-lg-8"type="submit" value="Gogogogo!">
 				</div>
@@ -51,6 +53,7 @@
 					 <div class="row">
 						<label for = '{{field.id_for_label}}' class ="control-label col-xs-4">{{field.label}}</label>
 						<div class="col-xs-8">{{field}}</div>
+						<div class="col-xs-8">{{field.errors}}</div>
 					</div>
 			      {% endfor %}	
 			      <div class="row">

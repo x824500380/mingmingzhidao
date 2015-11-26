@@ -8,7 +8,7 @@ from zhidao.models import *
 import requests
 import re
 import sys
-
+from django.contrib.auth.decorators import login_required
 from zhidao.forms import *
 from lxml import etree
 from django.contrib.auth import *
@@ -98,6 +98,8 @@ def login(request):
 				if user.is_active:
 					auth.login(request,user)
 					return render_to_response('index.html',{'user':user})
+		else:
+			return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})	
 	else:
 		loginform = LoginForm()
         registerform = RegistrationForm()
@@ -110,15 +112,20 @@ def register(request):
 		if  registerform.is_valid():
 			user = User.objects.create_user(name = registerform.cleaned_data['username'],email = registerform.cleaned_data['email'],password = registerform.cleaned_data['password2'])
 			user.save()
+			is_register_error = 0
 			return render_to_response('index.html')
+		is_register_error = 1
 	else:
 		loginform = LoginForm()
 		registerform = RegistrationForm()
-	return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})
+	return render_to_response('login.html',{'loginform':loginform,'is_register_error':is_register_error,'registerform':registerform})
 def logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect("/index")
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+def usercenter(request):
+	return render_to_response('information.html',{'user':request.user})
 @csrf_exempt
+@login_required
 def changepwd(request):
 	if request.method == "POST":
 		changepwdform = ChangepwdForm(request.POST)
@@ -132,12 +139,16 @@ def changepwd(request):
 				user.set_password(newpwd)
 				user.save()
 				return render_to_response('index.html',{'user':user})
-			else:
-				return render_to_response('changepwd.html',{'changepwdform':changepwdform,'is_oldpwd_wrong':True})
 	else:
 		changepwdform = ChangepwdForm()
 		return render_to_response('changepwd.html',{'changepwdform':changepwdform})
-#def inforupdate(request):
+@csrf_exempt
+def inforupdate(request):
+	if request.method == "POST":
+		pass
+	else:
+		informationform = InformationForm()
+		return render_to_response('inforupdate.html',{'informationform':informationform})
 	
 
 
