@@ -141,7 +141,7 @@ def changepwd(request):
 				return render_to_response('index.html',{'user':user})
 	else:
 		changepwdform = ChangepwdForm()
-		return render_to_response('changepwd.html',{'changepwdform':changepwdform})
+	return render_to_response('changepwd.html',{'changepwdform':changepwdform})
 @csrf_exempt
 def inforupdate(request):
 	if request.method == "POST":
