@@ -78,6 +78,9 @@
     <!--[if lte IE 8]>
 	<script src="./static/js/ie/respond.min.js"></script>
 	<![endif]-->
+	<footer class="row-fluid navbar-fixed-bottom">
+		<button class="btn col-xs-push-11 col-xs-1 col-sm-push-11 col-sm-1 col-md-push-11 col-md-1 col-lg-push-11 col-lg-1" id="btnmore">more</button>
+	</footer>
     <script type="text/javascript">
     //window resize
         var currentWidth = 1100;
@@ -120,10 +123,9 @@
                 });
             }
         });
-        $(window).scroll(function() {
-            // 当滚动到最底部以上50像素时， 加载新内容
-            if ($(document).height() - $(this).scrollTop() - $(this).height() < 50) {
-                $('#container').append($("#test" + parseInt(num)).html());
+          window.onload = function () {
+            document.getElementById("btnmore").onclick = function () {
+               $('#container').append($("#test" + parseInt(num)).html());
                 $('#container').BlocksIt({
                     numOfCol: col,
                     offsetX: 8,
@@ -132,7 +134,7 @@
                 $("img.lazy").lazyload();
                 num = num + 1;
             }
-        });
+        }
 
         
     });
