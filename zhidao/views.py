@@ -43,7 +43,7 @@ def webspider(WebSpider,url):
 	qNumber =0
 	webqNumber = 0
 	for Q in weblink:
-		if dllength[qNumber] == 4:
+		if dllength[qNumber] == 4 and len(webquestion)>webqNumber:
 			info = webquestion[webqNumber].xpath('string(.)')
 			WebSpider.SpiderQuestion(info,qNumber)
 			webqNumber+=1
@@ -64,7 +64,7 @@ def search(request):
 	postquestion=request.POST["question"]
 	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+postquestion
 	spiderlist=[]
-	for i in range(1,11):
+	for i in range(1,4):
 		spiderline=spider()
 		urlLine = "http://zhidao.baidu.com/search?lm=0&rn=10&pn="+str(i*10)+"&fr=search&ie=gbk&word="+postquestion
 		webspider(spiderline,urlLine)
