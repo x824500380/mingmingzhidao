@@ -44,9 +44,9 @@ a:active {
 .grid {
     width: 188px;
     min-height: 100px;
-    padding: 15px;
+    padding: 10px;
     background: #fff;
-    margin: 2px;
+    margin: 0;
     font-size: 12px;
     float: left;
     box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);

@@ -21,10 +21,10 @@
 <body>
     <!-- Header -->
     {% autoescape off %}
-    <div id="wrapper" class="container">
-        <div id="container" class="row">
+    <div id="wrapper">
+        <div id="container">
             {% for sa in question1 %}
-            <div class="grid col-xs-4">
+            <div class="grid">
                 <div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
                 {{sa.title}}
                 <br>
@@ -46,7 +46,7 @@
                 <hr>
             </div>
             {% endfor %} {%for line in html%}
-            <div class="grid col-xs-4">
+            <div class="grid">
                 <div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
                 <a href={{line.link}}>{{line.title}}</a>
                 <br>
