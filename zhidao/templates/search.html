@@ -7,38 +7,31 @@
 	<!--[if lte IE 8]>
 	<script src="./static/js/ie/html5shiv.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" type="text/ css" href="./static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./static/css/main.css" />
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="./static/css/ie8.css" />
-	<![endif]-->
-	<!--[if lte IE 9]>
-	<link rel="stylesheet" href="./static/css/ie9.css" />
-	<![endif]-->
+	
+	
+	<link rel='stylesheet'href='./static/search/css/style.css' media='screen'>
+
+
+
+	<script type="text/javascript" src="./static/search/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./static/search/js/jquery.lazyload.min.js"></script>
+	<script type="text/javascript" src="./static/search/js/blocksit.min.js"></script>
 </head>
 <body>
 	<!-- Header -->
-	<div class="pro">
-		<a href="./login">
-			<span class="glyphicon glyphicon-user"></span>
-		</a>
-	</div>
+	
 
 		{% autoescape off %}
-		
-		<div class="container-fluid container">
-				     <div class="accordion row" id="accordion2">
-				     {% for sa in question1 %}
-				            <div class="accordion-group col-xs-12" style="margin-left:-1em">
-				              <div class="accordion-heading">
-				                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#question{{sa.ID}}">
-				                 {{sa.title}}
-				                </a>
-				              </div>
-				              <div id="question{{sa.ID}}" class="accordion-body collapse in"  >
-				                <div class="accordion-inner">
+
+<div id="wrapper">
+
+	<div id="container">
+ {% for sa in question1 %}
+	<div class="grid">
+			<div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
+			{{sa.title}}
+			<br>
+			<div class="accordion-inner">
 				                  <h4>描述</h4><p>{{sa.Description}}</p>
 				                </div>
 				                <div>
@@ -57,37 +50,116 @@
 								    <h4>No Answer</h4>
 				                	{% endfor %}
 				                </div>
-				              </div>
-				            </div>
-					{% empty %}
-					<h2>404</h2>
-				      {% endfor %}
-				     </div>
-	    </div>
-		
-		
-		{%for line in html%}
-		<a href={{line.link}}>{{line.title}}</a>
-		<br>
-		<h4>描述</h4>
-		{%if line.question%}{{line.question}}
-		{%else%} <em>no description</em>
-		{%endif%}
-		<br>
-		<h4>回答</h4>
-		{{line.answer}}
-		<hr>
-		{% empty %}
-		<h1>404</h1>
+
+			<hr>
+			
+		</div>
+ {% endfor %}
+	{%for line in html%}
+	<div class="grid">
+			<div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
+			<a href={{line.link}}>{{line.title}}</a>
+			<br>
+			<h4>描述</h4>
+				{%if line.question%}{{line.question}}
+				{%else%} <em>no description</em>
+				{%endif%}
+			<br>
+			<h4>回答</h4>
+				{{line.answer}}
+			<hr>
+			
+		</div>
 		{%endfor%}
-			{% endautoescape %}
 	
+	</div>
+
+</div>
+
+{% for test in list %}
+<div id="test{{forloop.counter}}" style="display:none;">
+{% for line in test.list %}
+	<div class="grid">
+		<div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
+			<a href={{line.link}}>{{line.title}}</a>
+			<br>
+			<h4>描述</h4>
+				{%if line.question%}{{line.question}}
+				{%else%} <em>no description</em>
+				{%endif%}
+			<br>
+			<h4>回答</h4>
+				{{line.answer}}
+			<hr>
+	</div>
+	{% endfor %}
+</div>
+{% endfor %}
+
+			{% endautoescape %}
+
 	<!-- Footer -->
 
 	<!-- Scripts -->
 	<!--[if lte IE 8]>
 	<script src="./static/js/ie/respond.min.js"></script>
 	<![endif]-->
-
+<script type="text/javascript">
+var num = 1;
+$(function(){
+	$("img.lazy").lazyload({		
+		load:function(){
+			$('#container').BlocksIt({
+				numOfCol:5,
+				offsetX: 8,
+				offsetY: 8
+			});
+		}
+	});	
+	$(window).scroll(function(){
+			// 当滚动到最底部以上50像素时， 加载新内容
+		if ($(document).height() - $(this).scrollTop() - $(this).height()<50){
+			$('#container').append($("#test"+parseInt(num)).html());		
+			$('#container').BlocksIt({
+				numOfCol:5,
+				offsetX: 8,
+				offsetY: 8
+			});
+			$("img.lazy").lazyload();
+			num =num+1;
+		}
+	});
+	
+	//window resize
+	var currentWidth = 1100;
+	$(window).resize(function() {
+		var winWidth = $(window).width();
+		var conWidth;
+		if(winWidth < 660) {
+			conWidth = 440;
+			col = 2
+		} else if(winWidth < 880) {
+			conWidth = 660;
+			col = 3
+		} else if(winWidth < 1100) {
+			conWidth = 880;
+			col = 4;
+		} else {
+			conWidth = 1100;
+			col = 5;
+		}
+		
+		if(conWidth != currentWidth) {
+			currentWidth = conWidth;
+			$('#container').width(conWidth);
+			$('#container').BlocksIt({
+				numOfCol: col,
+				offsetX: 8,
+				offsetY: 8
+			});
+		}
+	});
+});
+</script>
 </body>
 </html>

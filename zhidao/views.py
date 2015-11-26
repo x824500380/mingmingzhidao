@@ -15,18 +15,9 @@ from django.contrib.auth import *
 from django.template.context_processors import csrf
 from django import forms
 
-
-def index(request):
-	return render_to_response('index.html',{'user':request.user})
-@csrf_exempt
-def search(request):
-	
-	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+request.POST["question"]
+def webspider(WebSpider,url):
 	html = requests.get(url)
 	html.encoding='gbk'
-
-	WebSpider=spider()
-
 	selector = etree.HTML(html.text)
 
 	webtitle =selector.xpath('//*[@id="wgt-list"]/dl/dt/a')#title
@@ -66,6 +57,20 @@ def search(request):
 		WebSpider.SpiderAnswer(info,qNumber)
 		qNumber+=1
 	qNumber = 0
+def index(request):
+	return render_to_response('index.html',{'user':request.user})
+@csrf_exempt
+def search(request):
+	postquestion=request.POST["question"]
+	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+postquestion
+	spiderlist=[]
+	for i in range(1,11):
+		spiderline=spider()
+		urlLine = "http://zhidao.baidu.com/search?lm=0&rn=10&pn="+str(i*10)+"&fr=search&ie=gbk&word="+postquestion
+		webspider(spiderline,urlLine)
+		spiderlist.append(spiderline)
+	WebSpider=spider()
+	webspider(WebSpider,url)
 
 	title = request.POST['question']
 	question_list = question.objects.filter(Title__icontains=title)#获得数据库里的原始问题数据
@@ -81,7 +86,7 @@ def search(request):
 		dbQuestionList.append(Formalquestion)
 
 	
-	return render_to_response('search.html',{"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList,"ss":dllength})
+	return render_to_response('search.html',{"list":spiderlist,"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
