@@ -12,9 +12,9 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div class="container-fluid main">
-				<div class="row-fluid">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class=" main">
+				<div class="">
+					<div class="info">
 
 						 {% if user.is_authenticated %} 
 						<span class="glyphicon glyphicon-user"></span>
@@ -28,14 +28,14 @@
 	                    {% endif %}		
 					</div>
 				</div>
-				<div class="row-fluid mid">
-					<div class="row-fluid mid-title  ">
+				<div class=" mid">
+					<div class=" mid-title  ">
 						<div class=" logo text-center">
-							<img src="/static/images/logo.jpg" class="img-responsive">
+							<img src="/static/images/logo.jpg" class="">
 						</div>
 					</div>
 					<div class="row-fluid mid-form">
-						<div class="col-md-8 col-md-offset-2 text-center">
+						<div class="serch text-center">
 							<form class="searchform form-inline" method="post" action="/search">
 								<div class="row-fluid">
 									<input class="input-lg"type="text" name="question" placeholder="你找啥？" />
