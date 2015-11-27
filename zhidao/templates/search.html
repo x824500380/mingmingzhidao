@@ -44,16 +44,16 @@
                 {{sa.title}}
                 <br>
                 <div class="accordion-inner">
-                    <h4>描述</h4>
+                    <h4 style="font-color:red;">描述</h4>
                     <p>{{sa.Description}}</p>
                 </div>
                 <div>
-                    <h4>回答</h4> {% for item in sa.bestanswer %}
-                    <h4>最佳答案</h4>
+                    <h4 tyle="font-color:red;">回答</h4> {% for item in sa.bestanswer %}
+                    <h4 tyle="font-color:red;">最佳答案</h4>
                     <h5>{{item.Content}}</h5>
                     <hr> {% empty %}
                     <h4>No Best Answer</h4> {% endfor %} {% for item in sa.answers %}
-                    <h4>其他回答</h4>
+                    <h4 tyle="font-color:red;">其他回答</h4>
                     <h5>{{item.Content}}</h5>
                     <hr> {% empty %}
                     <h4>No Answer</h4> {% endfor %}
@@ -65,9 +65,9 @@
                 <div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
                 <a href={{line.link}}>{{line.title}}</a>
                 <br>
-                <h4>描述</h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
+                <h4 tyle="font-color:red;">描述</h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
                 <br>
-                <h4>回答</h4> {{line.answer}}
+                <h4 tyle="font-color:red;">回答</h4> {{line.answer}}
                 <hr>
             </div>
             {%endfor%}
@@ -80,9 +80,9 @@
             <div class="imgholder"><img class="lazy" src="./static/search/images/pixel.gif" data-original="./static/search/images/adde8400jw1e7oix9df03j20i20axac6.jpg" width="175" /></div>
             <a href={{line.link}}>{{line.title}}</a>
             <br>
-            <h4>描述</h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
+            <h4 tyle="font-color:red;">描述</h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
             <br>
-            <h4>回答</h4> {{line.answer}}
+            <h4 tyle="font-color:red;">回答</h4> {{line.answer}}
             <hr>
         </div>
         {% endfor %}
