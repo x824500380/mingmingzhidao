@@ -13,9 +13,8 @@
 	</head>
 	<body>
 		<div class=" main">
-				<div class="">
+				
 					<div class="info">
-
 						 {% if user.is_authenticated %} 
 						<span class="glyphicon glyphicon-user"></span>
 	                    <span>{{ user }}</span>
@@ -27,34 +26,34 @@
 	                    <span>欢迎，请 <a href="./login">登录</a></span>
 	                    {% endif %}		
 					</div>
-				</div>
-				<div class=" mid">
-					<div class=" mid-title  ">
-						<div class=" logo text-center">
-							<img src="/static/images/logo.jpg" class="">
+
+					<div class=" mid">
+
+						<div class=" mid-title  ">
+								<img src="/static/images/logo.jpg" class="">
+						</div>
+
+						<div class="mid-form text-center">
+								<form class="searchform form-inline" method="post" action="/search">
+									<div class="row-fluid">
+										<input class="input-lg"type="text" name="question" placeholder="你找啥？" />
+										<input class="btn-lg btn-info "type="submit" value="明明知道" />
+									</div>
+								</form>
+						</div>
+
+					</div>
+
+					<div class="row-fluid navbar-fixed-bottom">
+						<hr>
+						<div class="span12">
+						<p class="text-center">
+									专业的问题检索小助手<br /> 问题不知道，请找 <a href="./">明明知道</a>
+								</p>
+							  
 						</div>
 					</div>
-					<div class="row-fluid mid-form">
-						<div class="serch text-center">
-							<form class="searchform form-inline" method="post" action="/search">
-								<div class="row-fluid">
-									<input class="input-lg"type="text" name="question" placeholder="你找啥？" />
-									<input class="btn-lg btn-info "type="submit" value="明明知道" />
-								</div>
-							</form>
-						</div>
-					</div>
 				</div>
-				<div class="row-fluid navbar-fixed-bottom">
-					<hr>
-					<div class="span12">
-					<p class="text-center">
-								专业的问题检索小助手<br /> 问题不知道，请找 <a href="./">明明知道</a>
-							</p>
-						  
-					</div>
-				</div>
-			</div>
 
 	</body>
 </html>
