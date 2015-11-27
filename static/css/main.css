@@ -13,6 +13,7 @@ html  body {
 }
 .logo{
 	margin-top: 5em;
+	margin-left: 45%;
 }
 .logo img{
 	max-height: 5em;
