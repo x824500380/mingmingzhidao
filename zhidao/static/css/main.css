@@ -6,33 +6,23 @@ html  body {
 	margin: 0;
 }
 .main{
-	position: relative;
 	
-	height: 100%;
-	width: 100%;
 }
 .mid{
-	position: relative;
-	height: 100%;
-	margin-top:0%;
-	width: 90%
+	
 }
 .logo{
-	background-image: url(/static/images/logo.jpg);
-	background-repeat: no-repeat;
-	background-size: 200px 80px;
-	background-position: 0 95%;
-	height: 200px;
+	margin-top: 5em;
+}
+.logo img{
+	max-height: 5em;
+	max-width: auto;
 }
 .mid-title {
-	position: relative;
-	float: center;
-	margin-bottom: 0;
+	
 }
 .mid-form {
-	position: relative;
-	float: center;
-	margin-top: -5px;
+	
 }
 #myTab {
 	margin: 120px auto auto auto;
