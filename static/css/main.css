@@ -15,6 +15,102 @@ html  body {
 	position: relative;
 }
 
+
+
+#myTab {
+	margin: 120px auto auto auto;
+	width: 80%;
+	border-style: solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
+}
+#myTabContent{
+	margin: auto; 
+	width: 80%;
+	border-style: none solid solid solid;
+	border-color: rgba(154,183,172,0.3);
+	border-width: 5px;
+}
+.form-group{
+	width: 70%;
+	border-width: 1px;
+	margin:auto;
+	padding: 0;
+}
+.input{
+	width: 100%;
+}
+.group-btn{
+	margin-top:5px;
+	margin-left: 10px;
+}
+@media screen and (min-width: 1101px) { 
+.mid-title img{
+	max-height: 5em;
+	max-width: auto;
+}
+.mid-title {
+	width: 50%;
+  height: 50%;
+
+  margin: 5em auto auto auto;
+  position: absolute;
+  top: 0; left: 30em; bottom: 0; right: 0;
+}
+.mid-form {
+  margin: 10em auto auto auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  
+}
+} 
+/* css注释：设置了浏览器宽度不小于1201px时 abc 显示1200px宽度 */ 
+
+@media screen and (max-width: 1100px) { 
+.mid-title img{
+	max-height: 5em;
+	max-width: auto;
+}
+.mid-title {
+	width: 50%;
+  height: 50%;
+
+  margin: 5em auto auto auto;
+  position: absolute;
+  top: 0; left: 25em; bottom: 0; right: 0;
+}
+.mid-form {
+  margin: 10em auto auto auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  
+}
+} 
+/* 设置了浏览器宽度不大于1200px时 abc 显示900px宽度 */ 
+
+@media screen and (max-width: 850px) { 
+.mid-title img{
+	max-height: 5em;
+	max-width: auto;
+}
+.mid-title {
+	width: 50%;
+  height: 50%;
+
+  margin: 5em auto auto auto;
+  position: absolute;
+  top: 0; left: 15em; bottom: 0; right: 0;
+}
+.mid-form {
+  margin: 10em auto auto auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  
+}
+} 
+/* 设置了浏览器宽度不大于901px时 abc 显示200px宽度 */ 
+
+@media screen and (max-width: 500px) { 
 .mid-title img{
 	max-height: 5em;
 	max-width: auto;
@@ -33,33 +129,4 @@ html  body {
   top: 0; left: 0; bottom: 0; right: 0;
   
 }
-
-#myTab {
-	margin: 120px auto auto auto;
-	width: 80%;
-	border-style: solid;
-	border-color: rgba(154,183,172,0.3);
-	border-width: 5px;
-}
-#myTabContent{
-	margin: auto; 
-	width: 80%;
-	border-style: none solid solid solid;
-	border-color: rgba(154,183,172,0.3);
-	border-width: 5px;
-}
-
-
-.form-group{
-	width: 70%;
-	border-width: 1px;
-	margin:auto;
-	padding: 0;
-}
-.input{
-	width: 100%;
-}
-.group-btn{
-	margin-top:5px;
-	margin-left: 10px;
-}
+} 
