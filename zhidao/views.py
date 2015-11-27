@@ -125,30 +125,33 @@ def logout(request):
 def usercenter(request):
 	return render_to_response('information.html',{'user':request.user})
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def changepwd(request):
 	if request.method == "POST":
-		changepwdform = ChangepwdForm(request.POST)
-		if changepwdform.is_valid():
-			email = request.user.email
-			oldpwd = changepwdform.cleaned_data['oldpassword']
-			user = authenticate(email = email, password = oldpwd)
-
-			if user is not None and user.is_active:
-				newpwd = changepwdform.cleaned_data['newpassword2']
-				user.set_password(newpwd)
-				user.save()
-				return render_to_response('index.html',{'user':user})
+		form = ChangepwdForm(user = request.user, data = request.POST)
+		if form.is_valid():
+			user = request.user
+			user.set_password(form.cleaned_data['newpassword2'])
+			user.save()
+		return HttpResponseRedirect("/information")
 	else:
-		changepwdform = ChangepwdForm()
-	return render_to_response('changepwd.html',{'changepwdform':changepwdform})
+		form = ChangepwdForm(user = request.user)
+	return render_to_response('changepwd.html',{'changepwdform':form})
 @csrf_exempt
+@login_required(login_url='/login')
 def inforupdate(request):
 	if request.method == "POST":
-		pass
+		form = InformationForm(request.POST)
+		if form.is_valid():
+			request.user.gender = form.cleaned_data['gender']
+			request.user.date_of_birth = form.cleaned_data['birthday']
+			request.user.address = form.cleaned_data['address']
+			request.user.information = form.cleaned_data['information']
+			request.user.save()
+			return HttpResponseRedirect("/information")
 	else:
-		informationform = InformationForm()
-		return render_to_response('inforupdate.html',{'informationform':informationform})
+		form = InformationForm()
+	return render_to_response('inforupdate.html',{'informationform':form})
 	
 
 

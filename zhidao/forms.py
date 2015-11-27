@@ -91,27 +91,33 @@ class ChangepwdForm(forms.Form):
         attrs={'class':'form-control','required': ''}
     ),
 )
-    def clean_oldpassword(self):
-        pass
-    def clean_newpassword2(self):
-        if 'newpassword1' in self.cleaned_data:
-            newpassword1 = self.cleaned_data['newpassword1']
-            newpassword2 = self.cleaned_data['newpassword2']
-            if newpassword1 == newpassword2:
-                return self.cleaned_data
-            raise forms.ValidationError('两次输入的密码不匹配')
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(ChangepwdForm, self).__init__(*args, **kwargs)
+    def clean(self):
+        oldpassword = self.cleaned_data.get('oldpassword')
+        newpassword1 = self.cleaned_data.get('newpassword1')
+        newpassword2 = self.cleaned_data.get('newpassword2')
+
+        if not self.user.check_password(oldpassword):
+            raise forms.ValidationError(u'原密码错误')
+        if newpassword1 and newpassword2:
+            if newpassword2 != newpassword1:
+                raise forms.ValidationError(u'两次输入的密码不匹配')
+        return  self.cleaned_data
+
 class InformationForm(forms.Form):
     SEX_CHOICES = (
     ('0','男'),
     ('1','女'),
 )
-    gender = forms.ChoiceField(choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'})
-    birthday = forms.DateField(input_formats=['%Y-%m-%d',],error_messages={'invalid':'请输入正确格式的日期'})
-    address = forms.CharField(label=u"地址",max_length=100,widget=forms.TextInput(
-        attrs={'placeholder': u'地址', }
+    gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'})
+    birthday = forms.DateField(label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
+    address = forms.CharField(label=u"地址",required=False,max_length=100,widget=forms.TextInput(
+        attrs={'placeholder': u'地址'}
     ),
 )
-    information = forms.CharField(label=u"个人简介",max_length=400,widget=forms.TextInput(
+    information = forms.CharField(label=u"个人简介",required=False,max_length=400,widget=forms.Textarea(
         attrs={'placeholder': u'个人简介', }
     ),
 )
