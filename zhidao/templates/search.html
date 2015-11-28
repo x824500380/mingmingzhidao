@@ -48,13 +48,13 @@
                     <p>{{sa.Description}}</p>
                 </div>
                 <div>
-                    <h4 tyle="font-color:red;"><strong>回答</strong></h4> {% for item in sa.bestanswer %}
+                    <h4 tyle="font-color:red;"><strong>回答</strong></h4> <p>{% for item in sa.bestanswer %}</p>
                     <h4 tyle="font-color:red;"><strong>最佳答案</strong></h4>
                     <h5>{{item.Content}}</h5>
                     <hr> {% empty %}
-                    <h4>No Best Answer</h4> {% endfor %} {% for item in sa.answers %}
+                    <h4>No Best Answer</h4> {% endfor %} <p>{% for item in sa.answers %}</p>
                     <h4 tyle="font-color:red;"><strong>其他回答</strong></h4>
-                    <h5>{{item.Content}}</h5>
+                    <h5><p>{{item.Content}}<p></h5>
                     <hr> {% empty %}
                     <h4>No Answer</h4> {% endfor %}
                 </div>
@@ -67,7 +67,7 @@
                 <br>
                 <h4 tyle="font-color:red;"><strong>描述</strong></h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
                 <br>
-                <h4 tyle="font-color:red;"><strong>回答</strong></h4> {{line.answer}}
+                <h4 tyle="font-color:red;"><strong>回答</strong></h4><p> {{line.answer}}</p>
                 <hr>
             </div>
             {%endfor%}
@@ -82,7 +82,7 @@
             <br>
             <h4 tyle="font-color:red;"><strong>描述</strong></h4> {%if line.question%}{{line.question}} {%else%} <em>no description</em> {%endif%}
             <br>
-            <h4 tyle="font-color:red;"><strong>回答</strong></h4> {{line.answer}}
+            <h4 tyle="font-color:red;"><strong>回答</strong></h4> <p>{{line.answer}}</p>
             <hr>
         </div>
         {% endfor %}

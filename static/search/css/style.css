@@ -72,11 +72,13 @@ a:active {
 .grid .meta {
     text-align: right;
     color: #777;
-    font-style: italic;
+    
 }
-
+.grid p{
+    
+}
 .grid .imgholder img {
-    max-width: 100%;
+    max-width: 90%;
     background: #ccc;
     display: block;
     margin-left: 0.9em; 
