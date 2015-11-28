@@ -75,7 +75,7 @@ a:active {
     
 }
 .grid p{
-    
+    overflow: hidden;    
 }
 .grid .imgholder img {
     max-width: 90%;
