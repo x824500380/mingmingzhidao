@@ -15,6 +15,7 @@ from django.contrib.auth import *
 from django.template.context_processors import csrf
 from django import forms
 
+import urllib
 def webspider(WebSpider,url):
 	html = requests.get(url)
 	html.encoding='gbk'
@@ -61,7 +62,14 @@ def index(request):
 	return render_to_response('index.html',{'user':request.user})
 @csrf_exempt
 def search(request):
-	postquestion=request.POST["question"]
+	
+	reload(sys)
+
+	sys.setdefaultencoding('utf8')
+	
+	postquestio=request.POST["question"]
+	postquestion=urllib.quote(postquestio.decode('utf8','ignore').encode('gbk','ignore'))
+	#postquestion2=postquestion.decode(encoding='gbk',errors='strict')
 	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+postquestion
 	spiderlist=[]
 	for i in range(1,4):
@@ -86,7 +94,7 @@ def search(request):
 		dbQuestionList.append(Formalquestion)
 
 	
-	return render_to_response('search.html',{"list":spiderlist,"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList})
+	return render_to_response('search.html',{"char":postquestion,"list":spiderlist,"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
