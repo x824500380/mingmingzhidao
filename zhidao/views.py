@@ -14,7 +14,7 @@ from lxml import etree
 from django.contrib.auth import *
 from django.template.context_processors import csrf
 from django import forms
-
+from django.http import HttpResponseRedirect
 import urllib
 def webspider(WebSpider,url):
 	html = requests.get(url)
@@ -61,26 +61,27 @@ def webspider(WebSpider,url):
 def index(request):
 	return render_to_response('index.html',{'user':request.user})
 @csrf_exempt
-def search(request):
+def pre_search(request,key):
+	question=request.POST['question']
+	url='/search/'+question+'/1'
+	return HttpResponseRedirect(url)
+def search(request,key,wd):
 	
 	reload(sys)
 
 	sys.setdefaultencoding('utf8')
 	
-	postquestio=request.POST["question"]
+	postquestio=wd
 	postquestion=urllib.quote(postquestio.decode('utf8','ignore').encode('gbk','ignore'))
 	#postquestion2=postquestion.decode(encoding='gbk',errors='strict')
-	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+postquestion
+	url="http://zhidao.baidu.com/search?lm=0&rn=10&pn="+str(int(key)*10)+"&fr=search&ie=gbk&word="+postquestion
+
 	spiderlist=[]
-	for i in range(1,4):
-		spiderline=spider()
-		urlLine = "http://zhidao.baidu.com/search?lm=0&rn=10&pn="+str(i*10)+"&fr=search&ie=gbk&word="+postquestion
-		webspider(spiderline,urlLine)
-		spiderlist.append(spiderline)
+	
 	WebSpider=spider()
 	webspider(WebSpider,url)
 
-	title = request.POST['question']
+	title = wd
 	question_list = question.objects.filter(Title__icontains=title)#获得数据库里的原始问题数据
 
 	dbQuestionList=[]#存储格式化后的数据库问题
@@ -92,9 +93,9 @@ def search(request):
 			Formalanswer = Answer(item.ID,item.Content,item.UserID.name,item.is_best)
 			Formalquestion.handleanswer(Formalanswer)
 		dbQuestionList.append(Formalquestion)
-
-	
-	return render_to_response('search.html',{"char":postquestion,"list":spiderlist,"q":request.POST["question"],"html":WebSpider.list,"question1":dbQuestionList})
+	keynext=int(key)+1
+	keyformer=int(key)-1
+	return render_to_response('search.html',{"keyformer":keyformer,"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
