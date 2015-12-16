@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^$', 'zhidao.views.index'),
     url(r'^index$','zhidao.views.index'),
     url(r'^search/(?P<key>[0-9]*)$', 'zhidao.views.pre_search'),
-    url(r'^search/(?P<wd>(.+))/(?P<key>[0-9]*)/$', 'zhidao.views.search'), 
+    url(r'^search/(?P<wd>(.+))/(?P<key>[0-9]*)$', 'zhidao.views.search'), 
     url(r'^login$', 'zhidao.views.login'),
     url(r'^register$','zhidao.views.register'),
     url(r'^logout$','zhidao.views.logout'),
