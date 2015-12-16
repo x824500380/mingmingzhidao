@@ -131,3 +131,4 @@ class QuestionForm(forms.Form):
             Description = self.cleaned_data['description'],
             UserID  = user)
         newquestion.save()
+        return newquestion.ID

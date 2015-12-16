@@ -87,7 +87,7 @@ def search(request,key,wd):
 	dbQuestionList=[]#存储格式化后的数据库问题
     
 	for Q in question_list:
-		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.name,Q.ID)
+		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.id,Q.ID)
 		Aorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
 		for item in Aorial:
 			Formalanswer = Answer(item.ID,item.Content,item.UserID.name,item.is_best)
@@ -167,10 +167,14 @@ def putquestion(request):
 	if request.method == "POST":
 		form = QuestionForm(request.POST)
 		if form.is_valid():
-			form.save(request.user)
-			return HttpResponseRedirect('/index')
+			questionID = form.save(request.user)
+			url = '/'+str(questionID)+'/'+str(request.user.id)+'/detail'
+			return HttpResponseRedirect(url)
 	else:
 		form = QuestionForm()
 	return render_to_response('put_question.html',{'form':form})
 
-
+def questiondetail(request,questionID,userID):
+	user = User.objects.get(id = userID)
+	questiontemp = question.objects.get(ID = questionID)
+	return render_to_response('questiondetail.html',{'question':questiontemp,'user':user})

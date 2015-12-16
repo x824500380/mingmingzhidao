@@ -105,14 +105,14 @@ class Answer:
         self.Username = Username
         self.is_best = is_best
 class dbSpider:
-    def __init__(self,title,link,description,username,ID):
+    def __init__(self,title,link,question,userID,ID):
         self.ID=ID
         self.title = title
         self.link = link
-        self.description= description
+        self.question = question
         self.answers=[]
         self.bestanswer = []
-        self.username = username
+        self.userID = userID
     def handleanswer(self,answer):
         if answer.is_best:
             self.bestanswer.append(answer)
