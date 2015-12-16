@@ -95,7 +95,7 @@ def search(request,key,wd):
 		dbQuestionList.append(Formalquestion)
 	keynext=int(key)+1
 	keyformer=int(key)-1
-	return render_to_response('search.html',{"keyformer":keyformer,"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList})
+	return render_to_response('search.html',{"keyformer":keyformer,"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList,"user":request.user})
 @csrf_exempt
 def login(request):
 	if request.method == "POST":
@@ -161,6 +161,16 @@ def inforupdate(request):
 	else:
 		form = InformationForm()
 	return render_to_response('inforupdate.html',{'informationform':form})
-	
+@csrf_exempt
+@login_required(login_url='/login')
+def putquestion(request):
+	if request.method == "POST":
+		form = QuestionForm(request.POST)
+		if form.is_valid():
+			form.save(request.user)
+			return HttpResponseRedirect('/index')
+	else:
+		form = QuestionForm()
+	return render_to_response('put_question.html',{'form':form})
 
 

@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^logout$','zhidao.views.logout'),
     url(r'^information$','zhidao.views.usercenter'),
     url(r'^changepwd$','zhidao.views.changepwd'),
-    url(r'^inforupdate$','zhidao.views.inforupdate')
+    url(r'^inforupdate$','zhidao.views.inforupdate'),
+    url(r'^putquestion$','zhidao.views.putquestion')
 ]

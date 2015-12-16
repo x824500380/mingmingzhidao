@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form method = "POST">
+		{% for field in form%}
+		<div><label>{{field.label}}</label></div>
+		<div>{{field}}</div>
+		<div>{{field.errors}}</div>
+		{%endfor%}
+		<input class="btn btn-info btn-sm col-xs-12"type="submit" value="Gogogogo！">
+	</form>
+</body>
+</html>

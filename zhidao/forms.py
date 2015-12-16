@@ -122,3 +122,12 @@ class InformationForm(forms.Form):
     ),
 )
 
+class QuestionForm(forms.Form):
+    title = forms.CharField(label = u"题目",error_messages={'invalid':u'问题题目不能空白'},max_length = 100)
+    description = forms.CharField(label = u"详细描述", required = False,max_length = 400,widget = forms.Textarea())
+
+    def save(self,user):
+        newquestion = question(Title = self.cleaned_data['title'],
+            Description = self.cleaned_data['description'],
+            UserID  = user)
+        newquestion.save()
