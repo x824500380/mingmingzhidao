@@ -45,6 +45,16 @@ html  body {
 	margin-top:5px;
 	margin-left: 10px;
 }
+
+.baiduqus {
+  border: solid 1px;
+  border-color: rgba(154,183,172,0.3);
+  background-color: rgba(245,226,226,0.3);
+}
+.btnpage{
+  background-color: rgba(173,161,161,0.8);
+}
+
 @media screen and (max-width: 2000px) { 
 .mid-title img{
 	max-height: 5em;
