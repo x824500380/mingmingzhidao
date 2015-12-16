@@ -7,6 +7,9 @@ html  body {
 	height: 100%;
 	width: 100%;
 	margin: 0;
+  padding-top: 40px;
+  padding-bottom: 10px;
+
 }
 .main{
 	height: 100%;
@@ -48,13 +51,40 @@ html  body {
 
 .baiduqus {
   border: solid 1px;
-  border-color: rgba(154,183,172,0.3);
-  background-color: rgba(245,226,226,0.3);
+  border-color: rgba(170,183,172,0.3);
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.9);
+  padding-top: 5px;
+  margin-top: 10px;
 }
-.btnpage{
-  background-color: rgba(173,161,161,0.8);
-}
+.btnpage1{
+  background-color: rgba(160,161,161,0.8);
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
 
+
+}
+.btnpage2{
+  background-color: rgba(160,161,161,0.8);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.btnask{
+  background-color: rgba(160,161,161,0.8);
+  position: fixed;
+  bottom: 20px;
+  left: 5px;
+  width: 70px;
+  height: 70px;
+  -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%
+}
+.searchinfo{
+   background-color: rgb(180,180,180);
+   border: solid 1px;
+   border-color: rgba(235,235,235,0.9);
+}
 @media screen and (max-width: 2000px) { 
 .mid-title img{
 	max-height: 5em;
