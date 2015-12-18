@@ -4,14 +4,14 @@
 <head>
     <title>明明KNOWS</title>
    <meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		
-		
-		<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../../static/css/main.css" />
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        
+        
+        <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../static/css/main.css" />
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	</head>
+    </head>
 
 <body style="background-color:rgb(211,212,205)">
 
@@ -34,26 +34,23 @@
     <div id="wrapper" class="container">
         <div id="container" class="row">
             {% for sa in question1 %}
-            <div class="grid col-xs-12">
+            <div class="dbqus col-xs-12">
                 
                 <a href = '/{{sa.ID}}/{{sa.userID}}/detail'>{{sa.title}}</a>
                 <br>
                 <div class="accordion-inner">
                     <h4 style="font-color:red;"><strong>描述</strong></h4>
-                    <p>{{sa.Description}}</p>
+                    <p>{{sa.question}}</p>
                 </div>
                 <div>
                     <h4 tyle="font-color:red;"><strong>回答</strong></h4> <p>{% for item in sa.bestanswer %}</p>
                     <h4 tyle="font-color:red;"><strong>最佳答案</strong></h4>
                     <h5>{{item.Content}}</h5>
-                    <hr> {% empty %}
+                     {% empty %}
                     <h4>No Best Answer</h4> {% endfor %} <p>{% for item in sa.answers %}</p>
-                    <h4 tyle="font-color:red;"><strong>其他回答</strong></h4>
-                    <h5><p>{{item.Content}}<p></h5>
-                    <hr> {% empty %}
-                    <h4>No Answer</h4> {% endfor %}
+                    {% endfor %}
                 </div>
-                <hr>
+                
             </div>
             {% endfor %} {%for line in html%}
             <div class="baiduqus col-xs-12">
@@ -72,13 +69,13 @@
     <!-- Footer -->
     <!-- Scripts -->
     <!--[if lte IE 8]>
-	<script src="./static/js/ie/respond.min.js"></script>
-	<![endif]-->
-	<footer class="container-fluid">
-		<div class="row-fluid"><a href="../{{wd}}/{{keyformer}}"><button  class="btn  col-xs-offset-11 col-xs-1 btnpage1" ><span class="glyphicon glyphicon-arrow-right"></span></button></a></div>
-		<div class="row-fluid"><a href="../{{wd}}/{{keynext}}"><button  class="btn   col-xs-offset-11 col-xs-1 btnpage2" ><span class="glyphicon glyphicon-arrow-left"></span></button></a></div>
+    <script src="./static/js/ie/respond.min.js"></script>
+    <![endif]-->
+    <footer class="container-fluid">
+        <div class="row-fluid"><a href="../{{wd}}/{{keyformer}}"><button  class="btn  col-xs-offset-11 col-xs-1 btnpage1" ><span class="glyphicon glyphicon-arrow-left"></span></button></a></div>
+        <div class="row-fluid"><a href="../{{wd}}/{{keynext}}"><button  class="btn   col-xs-offset-11 col-xs-1 btnpage2" ><span class="glyphicon glyphicon-arrow-right"></span></button></a></div>
         <div class="row-fluid"><a href="/putquestion"><button  class="btn   col-xs-1 btnask" ><span class="glyphicon glyphicon-question-sign"></span>提问</button></a></div>
-	</footer>
+    </footer>
  
 </body>
 

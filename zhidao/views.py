@@ -177,4 +177,8 @@ def putquestion(request):
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)
 	questiontemp = question.objects.get(ID = questionID)
-	return render_to_response('questiondetail.html',{'question':questiontemp,'user':user})
+	bestanswer=answer.objects.get(is_best=1)
+	bestuser=User.objects.get(id = bestanswer.UserID_id)
+	otheranswer=answer.objects.get(is_best=0)
+	otheruser=User.objects.get(id = otheranswer.UserID_id)
+	return render_to_response('questiondetail.html',{"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
