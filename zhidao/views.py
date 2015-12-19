@@ -195,6 +195,7 @@ def questiondetail(request,questionID,userID):
 	answerform = AnswerForm()
 	return render_to_response('questiondetail.html',{'form':answerform,"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
 @csrf_exempt
+@login_required(login_url='/login')
 def putanswer(request,questionID):
 	if request.method == "POST":
 		form = AnswerForm(request.POST,auto_id = True)
