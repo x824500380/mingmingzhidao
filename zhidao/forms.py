@@ -132,3 +132,15 @@ class QuestionForm(forms.Form):
             UserID  = user)
         newquestion.save()
         return newquestion.ID
+class AnswerForm(forms.Form):
+    content = forms.CharField(required = False,max_length = 400,widget = forms.Textarea(
+        attrs = {'placeholder':u'你的意见呢？','class':'content'}),
+    )
+
+    def save(self,user,question):
+        newanswer = answer(Content = self.cleaned_data['content'],
+            UserID = user,
+            QuestionID = question,
+            is_best = 0)
+        newanswer.save()
+        return newanswer.ID

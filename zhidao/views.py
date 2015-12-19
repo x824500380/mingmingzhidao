@@ -165,7 +165,7 @@ def inforupdate(request):
 @login_required(login_url='/login')
 def putquestion(request):
 	if request.method == "POST":
-		form = QuestionForm(request.POST)
+		form = QuestionForm(request.POST,auto_id = True)
 		if form.is_valid():
 			questionID = form.save(request.user)
 			url = '/'+str(questionID)+'/'+str(request.user.id)+'/detail'
@@ -173,7 +173,7 @@ def putquestion(request):
 	else:
 		form = QuestionForm()
 	return render_to_response('put_question.html',{'form':form})
-
+@csrf_exempt
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)
 	questiontemp = question.objects.get(ID = questionID)
@@ -192,4 +192,17 @@ def questiondetail(request,questionID,userID):
 	except:
 		otheranswer=[]
 		otheruser=[]
-	return render_to_response('questiondetail.html',{"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+	answerform = AnswerForm()
+	return render_to_response('questiondetail.html',{'form':answerform,"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+@csrf_exempt
+def putanswer(request,questionID):
+	if request.method == "POST":
+		form = AnswerForm(request.POST,auto_id = True)
+		if form.is_valid():
+			questiontemp = question.objects.get(ID = questionID)
+			form.save(request.user,questiontemp)
+			url = '/'+str(questionID)+'/'+str(request.user.id)+'/detail'
+			return HttpResponseRedirect(url)
+	else:
+		form = AnswerForm()
+	return render_to_response('questiondetail.html',{'form':form})

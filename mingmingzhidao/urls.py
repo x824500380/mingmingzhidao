@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^changepwd$','zhidao.views.changepwd'),
     url(r'^inforupdate$','zhidao.views.inforupdate'),
     url(r'^putquestion$','zhidao.views.putquestion'),
-    url(r'^(?P<questionID>(.+))/(?P<userID>[0-9]*)/detail$','zhidao.views.questiondetail')
+    url(r'^(?P<questionID>(.+))/(?P<userID>[0-9]*)/detail$','zhidao.views.questiondetail'),
+    url(r'^(?P<questionID>(.+))/putanswer$','zhidao.views.putanswer')
     
 ]
