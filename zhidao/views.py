@@ -177,8 +177,19 @@ def putquestion(request):
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)
 	questiontemp = question.objects.get(ID = questionID)
-	bestanswer=answer.objects.get(is_best=1)
-	bestuser=User.objects.get(id = bestanswer.UserID_id)
-	otheranswer=answer.objects.get(is_best=0)
-	otheruser=User.objects.get(id = otheranswer.UserID_id)
+	
+	try:
+		bestanswer=answer.objects.get(is_best=1,QuestionID_id = questionID)
+		bestuser=User.objects.get(id = bestanswer.UserID_id)
+	except:
+		bestanswer=[]
+		bestuser=[]
+	try:
+		otheranswer=answer.objects.filter(is_best=0,QuestionID_id = questionID)
+		otheruser=[]
+		for Answer in otheranswer:
+			otheruser.append(User.objects.get(id = Answer.UserID_id))
+	except:
+		otheranswer=[]
+		otheruser=[]
 	return render_to_response('questiondetail.html',{"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
