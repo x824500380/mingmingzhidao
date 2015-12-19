@@ -141,6 +141,6 @@ class AnswerForm(forms.Form):
         newanswer = answer(Content = self.cleaned_data['content'],
             UserID = user,
             QuestionID = question,
-            )
+            is_best = False)
         newanswer.save()
         return newanswer.ID
