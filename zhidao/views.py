@@ -192,4 +192,4 @@ def questiondetail(request,questionID,userID):
 	except:
 		otheranswer=[]
 		otheruser=[]
-	return render_to_response('questiondetail.html',{"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+	return render_to_response('questiondetail.html',{"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})

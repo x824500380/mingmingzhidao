@@ -12,6 +12,20 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	</head>
 <body style="background-color:rgb(211,212,205)">
+<div class=" searchinfo navbar-fixed-top row-fluid">
+                    <div class="span12">
+                         {% if user.is_authenticated %} 
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>{{ user }}</span>
+                    <div><a href="./logout"><span>退出</span></a>
+                    <a href=""><span>个人中心</span></a>
+                    </div>
+                    {% else %} 
+                    <a href="./login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请 <a href="./login">登录</a></span>
+                    {% endif %}     
+                    </div>
+                </div>
 <div class="container">
 	<div class="questioninfo">
 
