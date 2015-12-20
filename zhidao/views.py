@@ -172,7 +172,7 @@ def putquestion(request):
 			return HttpResponseRedirect(url)
 	else:
 		form = QuestionForm()
-	return render_to_response('put_question.html',{'form':form})
+	return render_to_response('put_question.html',{"user":request.user,'form':form})
 @csrf_exempt
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)

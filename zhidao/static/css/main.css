@@ -138,8 +138,15 @@ html  body {
   margin-left: 2em;
   
 }
-.oth
-
+.putanswer{
+  margin-top: 10px;
+}
+.answer-btn{
+  margin-top: 10px;
+}
+.questionput{
+  margin-top: 10px;
+}
 @media screen and (max-width: 2000px) { 
 .mid-title img{
 	max-height: 5em;

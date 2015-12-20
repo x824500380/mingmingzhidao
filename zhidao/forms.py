@@ -123,8 +123,10 @@ class InformationForm(forms.Form):
 )
 
 class QuestionForm(forms.Form):
-    title = forms.CharField(label = u"题目",error_messages={'invalid':u'问题题目不能空白'},max_length = 100)
-    description = forms.CharField(label = u"详细描述", required = False,max_length = 400,widget = forms.Textarea())
+    title = forms.CharField(label = u"题目",error_messages={'invalid':u'问题题目不能空白'},max_length = 100,widget = forms.TextInput(
+        attrs = {'placeholder':u'问题题目：','class':'form-control'}),)
+    description = forms.CharField(label = u"详细描述", required = False,max_length = 400,widget = forms.Textarea(
+        attrs = {'placeholder':u'详细描述：','class':'form-control'}),)
 
     def save(self,user):
         newquestion = question(Title = self.cleaned_data['title'],
@@ -134,7 +136,7 @@ class QuestionForm(forms.Form):
         return newquestion.ID
 class AnswerForm(forms.Form):
     content = forms.CharField(required = False,max_length = 400,widget = forms.Textarea(
-        attrs = {'placeholder':u'你的意见呢？','class':'content'}),
+        attrs = {'placeholder':u'我要回答：','class':'form-control'}),
     )
 
     def save(self,user,question):
