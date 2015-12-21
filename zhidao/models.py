@@ -31,12 +31,12 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     date_of_birth = models.DateField(blank = True,null = True)
-    gender = models. IntegerField(default = 1)
+    gender = models. IntegerField(blank = True,null = True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default = False)
     is_admin = models.BooleanField(default=False)
     address = models.CharField(max_length=140,blank=True, null=True)
-    information = models.TextField()
+    information = models.TextField(blank = True,null = True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -66,18 +66,19 @@ class User(AbstractBaseUser):
 
 
 class question(models.Model):
-	ID = models.AutoField(primary_key = True)
-	UserID = models.ForeignKey("User")
-	Title = models.CharField(max_length = 100)
-	KeyWords = models.CharField(max_length = 100)
-	Description = models.TextField()
+    ID = models.AutoField(primary_key = True)
+    UserID = models.ForeignKey("User")
+    Title = models.CharField(max_length = 100)
+    KeyWords = models.CharField(max_length = 100)
+    Description = models.TextField()
+    Time = models.DateField(auto_now_add = True)
 class answer(models.Model):
-	ID = models.AutoField(primary_key = True)
-	QuestionID = models.ForeignKey("question")
-	Content = models.TextField()
-	is_best = models.BooleanField()
-	UserID = models.ForeignKey("User")
-
+    ID = models.AutoField(primary_key = True)
+    QuestionID = models.ForeignKey("question")
+    Content = models.TextField()
+    is_best = models.BooleanField()
+    UserID = models.ForeignKey("User")
+    Time = models.DateField(auto_now_add = True)
 class spider:
     def __init__(self):
         self.title=''

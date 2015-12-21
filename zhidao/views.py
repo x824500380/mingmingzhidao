@@ -145,7 +145,7 @@ def changepwd(request):
 		return HttpResponseRedirect("/information")
 	else:
 		form = ChangepwdForm(user = request.user)
-	return render_to_response('changepwd.html',{'changepwdform':form})
+	return render_to_response('changepwd.html',{'changepwdform':form,'user':request.user})
 @csrf_exempt
 @login_required(login_url='/login')
 def inforupdate(request):

@@ -35,8 +35,8 @@ class RegistrationForm(forms.Form):
     def clean_username(self):
         '''验证用户输入的用户名的合法性'''
         username = self.cleaned_data['username']    
-        if not re.search(r'^\w+$', username):
-            raise forms.ValidationError('用户名中只能包含字母、数字和下划线')
+        if not re.search(r'^\S+$', username):
+            raise forms.ValidationError('用户名中只能包含汉字、字母、数字和下划线')
         try:
             User.objects.get(name=username)
         except ObjectDoesNotExist:
