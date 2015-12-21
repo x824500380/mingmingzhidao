@@ -17,12 +17,12 @@
                          {% if user.is_authenticated %} 
                     <span class="glyphicon glyphicon-user"></span>
                     <span>{{ user }}</span>
-                    <div><a href="./logout"><span>退出</span></a>
-                    <a href=""><span>个人中心</span></a>
+                    <div><a href="../../logout"><span>退出</span></a>
+                    <a href="../../usercenter/information"><span>个人中心</span></a>
                     </div>
                     {% else %} 
-                    <a href="./login"><span class="glyphicon glyphicon-user"></span></a>
-                    <span>欢迎，请 <a href="./login">登录</a></span>
+                    <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请 <a href="../../login">登录</a></span>
                     {% endif %}     
                     </div>
 </div>
@@ -30,7 +30,7 @@
 	<div class="top">
 		<div class="infoname">
 		<span class="glyphicon glyphicon-user"></span>
-		<p style="font-size:20px;">name</p>
+		<p style="font-size:20px;">{{user.name}}</p>
 		</div>
 	</div>
 	<div class="leftside col-md-2">
@@ -39,18 +39,35 @@
         </button>
         <nav class="navbar-collapse collapse" role="navigation">
             <ul class="nav nav-tabs nav-stacked">
-            	<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>个人信息</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>我的问题</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-comment"></span>我的回答</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-warning-sign"></span>账号安全</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-sort"></span>时间之轴</a></li>
+            	<li><a href="../../usercenter/information"><span class="glyphicon glyphicon-info-sign"></span>个人信息</a></li>
+                <li><a href="../../usercenter/myquestions"><span class="glyphicon glyphicon-question-sign"></span>我的问题</a></li>
+                <li><a href="../../usercenter/myanswers"><span class="glyphicon glyphicon-comment"></span>我的回答</a></li>
+                <li><a href="../../usercenter/changepwd"><span class="glyphicon glyphicon-warning-sign"></span>修改密码</a></li>
+                <li><a href="../../usercenter/timetree"><span class="glyphicon glyphicon-sort"></span>时间之轴</a></li>
             </ul>
         </nav>
 	</div>
 	<div class="rightside col-md-10">
-		右边：添加具体属性
+		<div><a href="../usercenter/inforupdate">编辑资料</a></div>
+			<div><dt><em>基本资料</em>
+                {%if user.gender == 1%}
+				<dd><span>性别 </span><span>女</span>
+				{%elif user.gender == 0%}
+				<dd><span>性别 </span><span>男</span>
+                 {%endif%}
+				{%if user.date_of_birth%}
+				<dd><span>生日 </span><span>{{user.date_of_birth}}</span>
+				{%endif%}
+				{%if user.address%}
+				<dd><span>地址 </span><span>{{user.address}}</span>
+				{%endif%}
+				{%if user.information%}
+				<dd><span>个人简介 </span><span>{{user.information}}</span>
+				{%endif%}
+				</dl>
+		    </div>
 		<div class="righttest">
-		<button class="btn-lg btn-danger"></button>
+			
 		</div>
 	</div>
 </div>

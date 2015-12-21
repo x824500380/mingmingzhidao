@@ -157,10 +157,10 @@ def inforupdate(request):
 			request.user.address = form.cleaned_data['address']
 			request.user.information = form.cleaned_data['information']
 			request.user.save()
-			return HttpResponseRedirect("/information")
+			return HttpResponseRedirect("../usercenter/information")
 	else:
 		form = InformationForm()
-	return render_to_response('inforupdate.html',{'informationform':form})
+	return render_to_response('inforupdate.html',{'informationform':form,'user':request.user})
 @csrf_exempt
 @login_required(login_url='/login')
 def putquestion(request):
@@ -193,7 +193,7 @@ def questiondetail(request,questionID,userID):
 		otheranswer=[]
 		otheruser=[]
 	answerform = AnswerForm()
-	return render_to_response('questiondetail.html',{'form':answerform,"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'user':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+	return render_to_response('questiondetail.html',{'form':answerform,"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'questionuser':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
 @csrf_exempt
 @login_required(login_url='/login')
 def putanswer(request,questionID):
@@ -207,3 +207,11 @@ def putanswer(request,questionID):
 	else:
 		form = AnswerForm()
 	return render_to_response('questiondetail.html',{'form':form})
+def myquestions(request):
+	questionlist = question.objects.filter(UserID = request.user)
+	return render_to_response('myquestions.html',{'questionlist':questionlist,'user':request.user})
+def myanswers(request):
+	answerlist = answer.objects.filter(UserID = request.user)
+	return render_to_response('myanswers.html',{'answerlist':answerlist,'user':request.user})
+def timetree(request):
+	pass

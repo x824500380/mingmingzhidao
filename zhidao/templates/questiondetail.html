@@ -14,15 +14,15 @@
 <body style="background-color:rgb(211,212,205)">
 <div class=" searchinfo navbar-fixed-top row-fluid">
                     <div class="span12">
-                         {% if user.is_authenticated %} 
+                    {% if user.is_authenticated %} 
                     <span class="glyphicon glyphicon-user"></span>
                     <span>{{ user }}</span>
-                    <div><a href="./logout"><span>退出</span></a>
-                    <a href=""><span>个人中心</span></a>
+                    <div><a href="../../logout"><span>退出</span></a>
+                    <a href="../../usercenter/information"><span>个人中心</span></a>
                     </div>
                     {% else %} 
-                    <a href="./login"><span class="glyphicon glyphicon-user"></span></a>
-                    <span>欢迎，请 <a href="./login">登录</a></span>
+                    <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请 <a href="../../login">登录</a></span>
                     {% endif %}     
                     </div>
                 </div>
@@ -33,7 +33,7 @@
 			<h2><span class="glyphicon glyphicon-question-sign"></span>{{question.Title}}</h2>
 		</div>
 		<div>
-			<span class="glyphicon glyphicon-user"></span>{{user.name}}
+			<span class="glyphicon glyphicon-user"></span>{{questionuser.name}}
 		</div>
 		<div><p>{{question.Description}}</p></div>
 	</div>

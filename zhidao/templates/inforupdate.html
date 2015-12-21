@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>修改资料</title>
-</head>
-<body>
-	<div>
-		<form method = 'POST' action = '/inforupdate'>
+		<title>明明KNOWS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		
+		
+		<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../static/css/main.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	</head>
+<body style="background-color:rgb(211,212,205)">
+<div class=" searchinfo navbar-fixed-top row-fluid">
+                    <div class="span12">
+                         {% if user.is_authenticated %} 
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>{{ user }}</span>
+                    <div><a href="../../logout"><span>退出</span></a>
+                    <a href="../../usercenter/information"><span>个人中心</span></a>
+                    </div>
+                    {% else %} 
+                    <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请 <a href="../../login">登录</a></span>
+                    {% endif %}     
+                    </div>
+</div>
+<div class="container-fluid">
+	<div class="top">
+		<div class="infoname">
+		<span class="glyphicon glyphicon-user"></span>
+		<p style="font-size:20px;">{{user.name}}</p>
+		</div>
+	</div>
+	<div class="leftside col-md-2">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="glyphicon glyphicon-th-list"></span>
+        </button>
+        <nav class="navbar-collapse collapse" role="navigation">
+            <ul class="nav nav-tabs nav-stacked">
+            	<li><a href="../../usercenter/information"><span class="glyphicon glyphicon-info-sign"></span>个人信息</a></li>
+                <li><a href="../../usercenter/myquestions"><span class="glyphicon glyphicon-question-sign"></span>我的问题</a></li>
+                <li><a href="../../usercenter/myanswers"><span class="glyphicon glyphicon-comment"></span>我的回答</a></li>
+                <li><a href="../../usercenter/changepwd"><span class="glyphicon glyphicon-warning-sign"></span>修改密码</a></li>
+                <li><a href="../../usercenter/timetree"><span class="glyphicon glyphicon-sort"></span>时间之轴</a></li>
+            </ul>
+        </nav>
+	</div>
+	<div class="rightside col-md-10">
+		<div>
+		<form method = 'POST' action = '../usercenter/inforupdate'>
 			{% for field in informationform%}
 			<div><label>{{field.label}}</label></div>
 			<div>{{field}}{{field.errors}}
@@ -14,5 +58,12 @@
 			<input class="btn btn-info btn-sm col-xs-12"type="submit" value="Gogogogo！">
 		</form>
 	</div>
+		<div class="righttest">
+			
+		</div>
+	</div>
+</div>
+	
+	
 </body>
 </html>

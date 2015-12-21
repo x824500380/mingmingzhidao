@@ -48,12 +48,10 @@
         </nav>
 	</div>
 	<div class="rightside col-md-10">
-		<div>
-		<form method = "POST" action="/changepwd">
-			{{changepwdform}}
-			<input class="btn btn-info btn-sm col-xs-12"type="submit" value="Gogogogo！">
-		</form>
-	</div>
+		<ul>{%for item in answerlist%}
+			<li><a href='../../{{item.QuestionID.ID}}/{{item.QuestionID.UserID.id}}/detail'>{{item.QuestionID.Title}}</a></li>
+			{%endfor%}
+		</ul>
 		<div class="righttest">
 			
 		</div>

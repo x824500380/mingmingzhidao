@@ -25,11 +25,13 @@ urlpatterns = [
     url(r'^login$', 'zhidao.views.login'),
     url(r'^register$','zhidao.views.register'),
     url(r'^logout$','zhidao.views.logout'),
-    url(r'^information$','zhidao.views.usercenter'),
-    url(r'^changepwd$','zhidao.views.changepwd'),
-    url(r'^inforupdate$','zhidao.views.inforupdate'),
+    url(r'^usercenter/information$','zhidao.views.usercenter'),
+    url(r'^usercenter/changepwd$','zhidao.views.changepwd'),
+    url(r'^usercenter/inforupdate$','zhidao.views.inforupdate'),
     url(r'^putquestion$','zhidao.views.putquestion'),
     url(r'^(?P<questionID>(.+))/(?P<userID>[0-9]*)/detail$','zhidao.views.questiondetail'),
-    url(r'^(?P<questionID>(.+))/putanswer$','zhidao.views.putanswer')
-    
+    url(r'^(?P<questionID>(.+))/putanswer$','zhidao.views.putanswer'),
+    url(r'^usercenter/myquestions$','zhidao.views.myquestions'),
+    url(r'^usercenter/myanswers$','zhidao.views.myanswers'),
+    url(r'^usercenter/timetree$','zhidao.views.timetree')
 ]
