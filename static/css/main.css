@@ -147,6 +147,29 @@ html  body {
 .questionput{
   margin-top: 10px;
 }
+.top{
+  background-color: rgba(224,193,130,1);
+  height: 120px;
+  position: relative;
+}
+.leftside{
+  margin-top: 10px;
+  background-color: rgba(224,193,130,1);
+  min-height: 40px;
+}
+.leftside nav li{
+  border: dashed;
+  margin-top: 45px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing:10px;
+}
+.rightside{
+  border: solid 1px;
+  margin-top: 10px;
+  height: 500px;
+}
 @media screen and (max-width: 2000px) { 
 .mid-title img{
 	max-height: 5em;
