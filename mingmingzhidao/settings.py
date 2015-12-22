@@ -39,7 +39,7 @@ else:
 SECRET_KEY = '2f#b5hxfomseu)!qccmmmaxi0e(@rdrny9e&_9prg6#d6^^i*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
