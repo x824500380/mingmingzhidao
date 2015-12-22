@@ -245,6 +245,9 @@ html  body {
   font-family: Microsoft YaHei;
   font-size: 17px;
 }
+.nav-tabs{
+border-bottom:0px solid;
+}
 @media screen and (max-width: 2000px) and (min-width: 1701px){ 
 .rightside{
   margin-left: 21em;
