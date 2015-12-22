@@ -15,10 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.conf import settings
-if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
-    urlpatterns += patterns('',
-            url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+
 urlpatterns = [
     url(r'^$', 'zhidao.views.index'),
     url(r'^index$','zhidao.views.index'),
@@ -37,3 +34,7 @@ urlpatterns = [
     url(r'^usercenter/myanswers$','zhidao.views.myanswers'),
     url(r'^usercenter/timetree$','zhidao.views.timetree')
 ]
+if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
+    urlpatterns += patterns('',
+            url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
