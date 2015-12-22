@@ -111,7 +111,7 @@ class InformationForm(forms.Form):
     ('0','男'),
     ('1','女'),
 )
-    gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'})
+    gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'},widget = forms.RadioSelect())
     birthday = forms.DateField(widget=forms.TextInput(
         attrs={'class':'input', }),label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
     address = forms.CharField(label=u"地址",required=False,max_length=100,widget=forms.TextInput(
@@ -119,7 +119,7 @@ class InformationForm(forms.Form):
     ),
 )
     information = forms.CharField(label=u"个人简介",required=False,max_length=400,widget=forms.Textarea(
-        attrs={'placeholder': u'个人简介', 'class':'input'}
+        attrs={'class':'input'}
     ),
 )
 
@@ -127,7 +127,7 @@ class QuestionForm(forms.Form):
     title = forms.CharField(label = u"题目",error_messages={'invalid':u'问题题目不能空白'},max_length = 100,widget = forms.TextInput(
         attrs = {'placeholder':u'问题题目：','class':'form-control'}),)
     description = forms.CharField(label = u"详细描述", required = False,max_length = 400,widget = forms.Textarea(
-        attrs = {'placeholder':u'详细描述：','class':'form-control'}),)
+        attrs = {'class':'form-control'}),)
 
     def save(self,user):
         newquestion = question(Title = self.cleaned_data['title'],

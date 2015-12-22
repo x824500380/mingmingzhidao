@@ -160,7 +160,10 @@ def inforupdate(request):
 			request.user.save()
 			return HttpResponseRedirect("../usercenter/information")
 	else:
-		form = InformationForm()
+		form = InformationForm(initial = {'gender':request.user.gender,
+			'birthday':request.user.date_of_birth,
+			'address':request.user.address,
+			'information':request.user.information})
 	return render_to_response('inforupdate.html',{'informationform':form,'user':request.user})
 @csrf_exempt
 @login_required(login_url='/login')
