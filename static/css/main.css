@@ -161,8 +161,7 @@ html  body {
 }
 .infoname span{
   margin-top: 30px;
-  border: solid 8px;
-  border-radius: 50%;
+  
 
 }
 .infoname p{
@@ -176,7 +175,7 @@ html  body {
   height:100%
 }
 .leftside nav li{
-  border: dashed;
+  
   margin-top: 39px;
   text-align: center;
   font-size: 15px;
