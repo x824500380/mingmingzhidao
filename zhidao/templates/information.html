@@ -48,27 +48,27 @@
         </nav>
 	</div>
 	<div class="rightside col-md-10">
-		<div><a href="../usercenter/inforupdate">编辑资料</a></div>
-			<div><dt><em>基本资料</em>
+	<div class="infoboard">
+		
+			<div class="infodt col-md-10"><dt><em>基本资料</em>
                 {%if user.gender == 1%}
-				<dd><span>性别 </span><span>女</span>
+                <dd><p><span>性别 </span>女</p></dd>
 				{%elif user.gender == 0%}
-				<dd><span>性别 </span><span>男</span>
+				<dd><p><span>性别 </span>男</p></dd>
                  {%endif%}
 				{%if user.date_of_birth%}
-				<dd><span>生日 </span><span>{{user.date_of_birth}}</span>
+				<dd><p><span>生日 </span>{{user.date_of_birth}}</p></dd>
 				{%endif%}
 				{%if user.address%}
-				<dd><span>地址 </span><span>{{user.address}}</span>
+				<dd><p><span>地址 </span>{{user.address}}</p></dd>
 				{%endif%}
 				{%if user.information%}
-				<dd><span>个人简介 </span><span>{{user.information}}</span>
+				<dd><p><span>个人简介 </span>{{user.information}}</p></dd>
 				{%endif%}
-				</dl>
+				</dt>
 		    </div>
-		<div class="righttest">
-			
-		</div>
+		    <div class="infoedit col-md-2"><a href="../usercenter/inforupdate">编辑资料</a></div>
+	</div>
 	</div>
 </div>
 	

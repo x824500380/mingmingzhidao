@@ -195,9 +195,55 @@ html  body {
 .rightside{
   margin-top: 10px;
   z-index: 5;
+  position: relative;
 }
-.righttest{
+.infoboard{
+  position: relative;
+  top:5em;
+}
+.infoedit{
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  font-size: 15px;
+}
+.infodt dt em{
+  font-family: Microsoft YaHei;
+  font-weight: bolder;
+  font-style: normal;
+  font-size: 25px;
 
+}
+.infodt dd{
+  margin-top: 2em;
+}
+.infodt dd p{
+  font-family: Microsoft YaHei;
+  font-weight: normal;
+  font-size: 20px;
+
+}
+.infodt dd p span{
+  font-family: Microsoft YaHei;
+  font-weight: lighter;
+  font-size: 20px;
+
+}
+.wdinfo{
+  
+  position: relative;
+  top:1em;
+}
+.wdinfo form *{
+  margin-top: 1em;
+}
+.list{
+  position: relative;
+  top:2em;
+}
+.list ul li{
+  margin-top: 2em;
+  font-family: Microsoft YaHei;
+  font-size: 17px;
 }
 @media screen and (max-width: 2000px) and (min-width: 1701px){ 
 .rightside{

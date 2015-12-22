@@ -48,14 +48,12 @@
         </nav>
 	</div>
 	<div class="rightside col-md-10">
-		
+		<div class="list">
 		<ul>{%for item in questionlist%}
-			<li><a href='../../{{item.ID}}/{{item.UserID.id}}/detail'>{{item.Title}}</a></li>
+			<li class="col-md-4"><a href='../../{{item.ID}}/{{item.UserID.id}}/detail'>{{item.Title}}</a></li>
 			{%endfor%}
 		</ul>
-		<div class="righttest">
-			
-		</div>
+	</div>
 	</div>
 </div>
 	

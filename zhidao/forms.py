@@ -112,13 +112,14 @@ class InformationForm(forms.Form):
     ('1','女'),
 )
     gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'})
-    birthday = forms.DateField(label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
+    birthday = forms.DateField(widget=forms.TextInput(
+        attrs={'class':'input', }),label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
     address = forms.CharField(label=u"地址",required=False,max_length=100,widget=forms.TextInput(
-        attrs={'placeholder': u'地址'}
+        attrs={'class':'input','placeholder': u'地址'}
     ),
 )
     information = forms.CharField(label=u"个人简介",required=False,max_length=400,widget=forms.Textarea(
-        attrs={'placeholder': u'个人简介', }
+        attrs={'placeholder': u'个人简介', 'class':'input'}
     ),
 )
 
