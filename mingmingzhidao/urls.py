@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url, patterns
-from django.conf import settings
 
 urlpatterns = [
     url(r'^$', 'zhidao.views.index'),
@@ -34,7 +33,3 @@ urlpatterns = [
     url(r'^usercenter/myanswers$','zhidao.views.myanswers'),
     url(r'^usercenter/timetree$','zhidao.views.timetree')
 ]
-'''if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
-    urlpatterns += patterns('',
-            url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )'''
