@@ -98,6 +98,10 @@ def search(request,key,wd):
 	return render_to_response('search.html',{"keyformer":keyformer,"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList,"user":request.user})
 @csrf_exempt
 def login(request):
+	if request.method == "GET":
+		request.session['login_from'] = request.META.get('HTTP_REFERER', '/')
+		loginform = LoginForm()
+        registerform = RegistrationForm()
 	if request.method == "POST":
 		loginform = LoginForm(request.POST)
 		registerform = RegistrationForm()
@@ -106,12 +110,9 @@ def login(request):
 			if user is not None:
 				if user.is_active:
 					auth.login(request,user)
-					return render_to_response('index.html',{'user':user})
+					return HttpResponseRedirect(request.session['login_from'])
 		else:
 			return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})	
-	else:
-		loginform = LoginForm()
-        registerform = RegistrationForm()
 	return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})			
 @csrf_exempt
 def register(request):
@@ -130,7 +131,7 @@ def register(request):
 	return render_to_response('login.html',{'loginform':loginform,'is_register_error':is_register_error,'registerform':registerform})
 def logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+	return HttpResponseRedirect('../index')
 def usercenter(request):
 	return render_to_response('information.html',{'user':request.user})
 @csrf_exempt

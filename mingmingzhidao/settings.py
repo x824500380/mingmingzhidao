@@ -23,7 +23,7 @@ if debug:
 
     MYSQL_DB = 'mingmingzhidao'      
     MYSQL_USER = 'root'   
-    MYSQL_PASS = 'root'   
+    MYSQL_PASS = '123456'   
     MYSQL_HOST_M = '127.0.0.1'   
     MYSQL_HOST_S = '127.0.0.1'   
     MYSQL_PORT = '3306'   
@@ -39,7 +39,7 @@ else:
 SECRET_KEY = '2f#b5hxfomseu)!qccmmmaxi0e(@rdrny9e&_9prg6#d6^^i*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
