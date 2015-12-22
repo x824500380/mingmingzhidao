@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^usercenter/myanswers$','zhidao.views.myanswers'),
     url(r'^usercenter/timetree$','zhidao.views.timetree')
 ]
-if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
+'''if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
     urlpatterns += patterns('',
             url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+    )'''
