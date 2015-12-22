@@ -1,4 +1,4 @@
-*{
+﻿*{
 	margin: 0;
 	font-size: 1em;
 	font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;
@@ -173,6 +173,7 @@ html  body {
   background-color: rgba(25,24,22,0.81);
   min-height: 40px;
   padding-bottom: 10px;
+  height:100%
 }
 .leftside nav li{
   border: dashed;
