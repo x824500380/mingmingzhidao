@@ -20,8 +20,8 @@
                     <div><a href="../../logout"><span>退出</span></a>
                     <a href="../../usercenter/information"><span>个人中心</span></a>
                      <a href="../../message/list"> <span>消息
-						{% if unreadnumber != 0 %}
-						<span>({{unreadnumber}})</span>
+						{% if messages != 0 %}
+						<span>({{messages}})</span>
 						{% endif %}
 	                    </span></a>
                     
