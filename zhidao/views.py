@@ -58,8 +58,18 @@ def webspider(WebSpider,url):
 		WebSpider.SpiderAnswer(info,qNumber)
 		qNumber+=1
 	qNumber = 0
+def messagenumber(user):
+	if user.is_authenticated():
+		count = 0
+		allmessage = user.To_id.all()
+		for item in allmessage:
+			if not item.is_view:
+				count += 1
+		return count
+	else:
+		return 0
 def index(request):
-	return render_to_response('index.html',{'user':request.user})
+	return render_to_response('index.html',{'user':request.user,'messages':messagenumber(request.user)})
 @csrf_exempt
 def pre_search(request,key):
 	question=request.POST['question']
@@ -95,7 +105,7 @@ def search(request,key,wd):
 		dbQuestionList.append(Formalquestion)
 	keynext=int(key)+1
 	keyformer=int(key)-1
-	return render_to_response('search.html',{"keyformer":keyformer,"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList,"user":request.user})
+	return render_to_response('search.html',{"keyformer":keyformer,'messages':messagenumber(request.user),"keynext":keynext,"url":url,"key":key,"wd":wd,"char":postquestion,"q":wd,"html":WebSpider.list,"question1":dbQuestionList,"user":request.user})
 @csrf_exempt
 def login(request):
 	if request.method == "GET":
@@ -122,18 +132,16 @@ def register(request):
 		if  registerform.is_valid():
 			user = User.objects.create_user(name = registerform.cleaned_data['username'],email = registerform.cleaned_data['email'],password = registerform.cleaned_data['password2'])
 			user.save()
-			is_register_error = 0
-			return render_to_response('index.html')
-		is_register_error = 1
+			return HttpResponseRedirect('../index')
 	else:
 		loginform = LoginForm()
 		registerform = RegistrationForm()
-	return render_to_response('login.html',{'loginform':loginform,'is_register_error':is_register_error,'registerform':registerform})
+	return render_to_response('login.html',{'loginform':loginform,'registerform':registerform})
 def logout(request):
 	auth.logout(request)
 	return HttpResponseRedirect('../index')
 def usercenter(request):
-	return render_to_response('information.html',{'user':request.user})
+	return render_to_response('information.html',{'user':request.user,'messages':messagenumber(request.user)})
 @csrf_exempt
 @login_required(login_url='/login')
 def changepwd(request):
@@ -146,7 +154,7 @@ def changepwd(request):
 		return HttpResponseRedirect("/information")
 	else:
 		form = ChangepwdForm(user = request.user)
-	return render_to_response('changepwd.html',{'changepwdform':form,'user':request.user})
+	return render_to_response('changepwd.html',{'changepwdform':form,'user':request.user,'messages':messagenumber(request.user)})
 @csrf_exempt
 @login_required(login_url='/login')
 def inforupdate(request):
@@ -164,7 +172,7 @@ def inforupdate(request):
 			'birthday':request.user.date_of_birth,
 			'address':request.user.address,
 			'information':request.user.information})
-	return render_to_response('inforupdate.html',{'informationform':form,'user':request.user})
+	return render_to_response('inforupdate.html',{'informationform':form,'user':request.user,'messages':messagenumber(request.user)})
 @csrf_exempt
 @login_required(login_url='/login')
 def putquestion(request):
@@ -176,7 +184,7 @@ def putquestion(request):
 			return HttpResponseRedirect(url)
 	else:
 		form = QuestionForm()
-	return render_to_response('put_question.html',{"user":request.user,'form':form})
+	return render_to_response('put_question.html',{"user":request.user,'form':form,'messages':messagenumber(request.user)})
 @csrf_exempt
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)
@@ -197,7 +205,7 @@ def questiondetail(request,questionID,userID):
 		otheranswer=[]
 		otheruser=[]
 	answerform = AnswerForm()
-	return render_to_response('questiondetail.html',{'form':answerform,"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'questionuser':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+	return render_to_response('questiondetail.html',{'form':answerform,'messages':messagenumber(request.user),"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'questionuser':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
 @csrf_exempt
 @login_required(login_url='/login')
 def putanswer(request,questionID):
@@ -205,18 +213,54 @@ def putanswer(request,questionID):
 		form = AnswerForm(request.POST,auto_id = True)
 		if form.is_valid():
 			questiontemp = question.objects.get(ID = questionID)
-			form.save(request.user,questiontemp)
-			url = '/'+str(questionID)+'/'+str(request.user.id)+'/detail'
+			answertemp = form.save(request.user,questiontemp)
+			newmessage = Message(To_id = questiontemp.UserID_id,
+				From_id = answertemp.UserID_id,
+				QuestionID = questiontemp,
+				AnswerID = answertemp,
+				about_question = True,
+				about_answer = False)
+			newmessage.save()
+			url = '/'+str(questionID)+'/'+str(questiontemp.UserID_id)+'/detail'
 			return HttpResponseRedirect(url)
 	else:
 		form = AnswerForm()
-	return render_to_response('questiondetail.html',{'form':form})
+	return render_to_response('questiondetail.html',{'form':form,'messages':messagenumber(request.user)})
 def myquestions(request):
 	questionlist = question.objects.filter(UserID = request.user)
-	return render_to_response('myquestions.html',{'questionlist':questionlist,'user':request.user})
+	return render_to_response('myquestions.html',{'questionlist':questionlist,'user':request.user,'messages':messagenumber(request.user)})
 def myanswers(request):
 	answerlist = answer.objects.filter(UserID = request.user)
-	return render_to_response('myanswers.html',{'answerlist':answerlist,'user':request.user})
+	return render_to_response('myanswers.html',{'answerlist':answerlist,'user':request.user,'messages':messagenumber(request.user)})
+@csrf_exempt
+@login_required(login_url='/login')
+def isbestanswer(request,answerID):
+	bestanswer = answer.objects.get(ID = answerID)
+	bestanswer.is_best = True
+	bestanswer.save()
+	questiontemp = bestanswer.QuestionID
+	questionID = bestanswer.QuestionID_id
+	newmessage = Message(To_id = bestanswer.UserID_id,
+				From_id = questiontemp.UserID_id,
+				QuestionID = questiontemp,
+				AnswerID = bestanswer,
+				about_question = False,
+				about_answer = True)
+	newmessage.save()
+	url = '/'+str(questionID)+'/'+str(questiontemp.UserID_id)+'/detail'
+	return HttpResponseRedirect(url)
+@csrf_exempt
+@login_required(login_url='/login')
+def messagelist(request):
+	allmessage = request.user.To_id.all()
+	unreadmessage = Message.objects.filter(To_id = request.user.id,is_view = False)
+	return render_to_response('messagecenter.html',{'allmessage':allmessage,'unreadmessage':unreadmessage,'user':request.user,'unreadnumber':messagenumber(request.user)})
+def viewmessage(request,messageID):
+	message = Message.objects.get(ID = messageID)
+	message.is_view = True
+	message.save()
+	url = '/'+str(message.QuestionID_id)+'/'+str(message.QuestionID.UserID_id)+'/detail'
+	return HttpResponseRedirect(url)
 def timetree(request):
 	questionlist = question.objects.filter(UserID = request.user)
 	answerlist = answer.objects.filter(UserID = request.user)
@@ -228,4 +272,4 @@ def timetree(request):
 	for answ in answerlist:
 		timelist.addnew(answ)
 	timelist.getdic()
-	return render_to_response('timetree.html',{'timelist':timelist,'user':request.user})
+	return render_to_response('timetree.html',{'timelist':timelist,'user':request.user,'messages':messagenumber(request.user)})

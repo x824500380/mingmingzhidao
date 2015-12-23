@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>明明知道|消息中心</title>
+</head>
+<body>
+<div class=" searchinfo navbar-fixed-top row-fluid">
+                    <div class="span12">
+                         {% if user.is_authenticated %} 
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>{{ user }}</span>
+                    <div><a href="../../logout"><span>退出</span></a>
+                    <a href="../../usercenter/information"><span>个人中心</span></a>
+                    <a href="../../message/list"> <span>消息
+						{% if unreadnumber != 0 %}
+						<span>({{unreadnumber}})</span>
+						{% endif %}
+	                    </span></a>
+                    </div>
+                    {% else %} 
+                    <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
+                    <span>欢迎，请 <a href="../../login">登录</a></span>
+                    {% endif %}     
+                     <a href = "../../index" ><span>首页</span></a>
+	                    	
+                    </div>
+</div>
+
+
+	<div class="allmessages"></div>
+	{%for message in allmessage%}
+	<label>所有消息</label>
+		{%if message.about_question %}
+		<div><a href = '../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
+		<span>{{message.Time}}</span></a></div>
+	    {% else %}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span><span>{{message.Time}}</span></a></div>
+	    {% endif %}
+	 {%endfor%}
+	<div class="unread"></div>
+	<label>未读消息
+	{% if unreadnumber != 0 %}
+	<span>({{unreadnumber}})</span>
+	{%endif%}
+	</label>
+		{%for message in unreadmessage%}
+		{%if message.about_question%}
+		<div><a href = '../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题：</span>
+		<span>{{message.AnswerID.Time}}</span></a></div>
+	    {% else %}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a></div>
+	    {% endif %}
+	    {% endfor %}
+</body>
+</html>

@@ -79,6 +79,26 @@ class answer(models.Model):
     is_best = models.BooleanField()
     UserID = models.ForeignKey("User")
     Time = models.DateField(auto_now_add = True)
+class Message(models.Model):
+    ID = models.AutoField(primary_key = True)
+    To = models.ForeignKey("User",related_name='To_id')
+    From = models.ForeignKey("User",related_name='From_id')
+    is_view = models.BooleanField(default = False)
+    QuestionID = models.ForeignKey("question")
+    AnswerID = models.ForeignKey("answer")
+    about_question = models.BooleanField()
+    about_answer = models.BooleanField()
+    Time = models.DateField(auto_now_add = True)
+class ExQuestion(models.Model):
+    ID = models.AutoField(primary_key = True)
+    Description = models.TextField()
+    AnswerID = models.ForeignKey("answer")
+    UserID = models.ForeignKey("User")
+    Time = models.DateField(auto_now_add = True)
+class Feedback(models.Model):
+    ID = models.AutoField(primary_key = True)
+    Content = models.TextField()
+    UserID =  models.IntegerField(blank = True,null = True)
 class spider:
     def __init__(self):
         self.title=''

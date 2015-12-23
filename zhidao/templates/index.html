@@ -20,11 +20,19 @@
 	                    <span>{{ user }}</span>
 	                    <div><a href="/logout"><span>退出</span></a>
 	                    	<a href="/usercenter/information"><span>个人中心</span></a>
+	                    <a href="../message/list"> <span>消息
+						{% if messages != 0 %}
+						<span>({{messages}})</span>
+						{% endif %}
+	                    </span></a>	
 	                    </div>
 	                    {% else %} 
 	                    <a href="./login"><span class="glyphicon glyphicon-user"></span></a>
 	                    <span>欢迎，请 <a href="./login">登录</a></span>
-	                    {% endif %}		
+
+	                    {% endif %}	
+	                    <a href = "../index" ><span>首页</span></a>
+
 					</div>
 
 					<div class=" mid">
