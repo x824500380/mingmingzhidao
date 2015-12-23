@@ -108,18 +108,19 @@ class ChangepwdForm(forms.Form):
 
 class InformationForm(forms.Form):
     SEX_CHOICES = (
-    ('0','男'),
+        ('0','男'),
     ('1','女'),
 )
-    gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'},widget = forms.RadioSelect())
+    gender = forms.ChoiceField(label=u"性别",required=False,choices=SEX_CHOICES,error_messages={'invalid':u'请您正确选择下拉框'},widget = forms.Select(
+         attrs={'class':'input-lg btn-block' }))
     birthday = forms.DateField(widget=forms.TextInput(
-        attrs={'class':'input', }),label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
+        attrs={'class':'input-lg btn-block', }),label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
     address = forms.CharField(label=u"地址",required=False,max_length=100,widget=forms.TextInput(
-        attrs={'class':'input','placeholder': u'地址'}
+        attrs={'class':'input-lg btn-block','placeholder': u'地址'}
     ),
 )
     information = forms.CharField(label=u"个人简介",required=False,max_length=400,widget=forms.Textarea(
-        attrs={'class':'input'}
+        attrs={'class':'input-lg btn-block'}
     ),
 )
 

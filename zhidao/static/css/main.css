@@ -257,6 +257,9 @@ border-bottom:0px solid;
   font-family: Microsoft YaHei;
 
 }
+#id_gender{
+  list-style-type:none;
+}
 
 @media screen and (max-width: 2000px) and (min-width: 1701px){ 
 .rightside{
