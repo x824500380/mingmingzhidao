@@ -14,25 +14,27 @@
 <body style="background-color:rgb(211,212,205)">
 <div class=" searchinfo navbar-fixed-top row-fluid">
                     <div class="span12">
-                    {% if user.is_authenticated %} 
+                         {% if user.is_authenticated %} 
                     <span class="glyphicon glyphicon-user"></span>
                     <span>{{ user }}</span>
                     <div><a href="../../logout"><span>退出</span></a>
                     <a href="../../usercenter/information"><span>个人中心</span></a>
-                    <a href="../../message/list"> <span>消息
-						{% if messages != 0 %}
-						<span>({{messages}})</span>
+                     <a href="../../message/list"> <span>消息
+						{% if unreadnumber != 0 %}
+						<span>({{unreadnumber}})</span>
 						{% endif %}
 	                    </span></a>
-                    </div>
+                    
                     {% else %} 
                     <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
                     <span>欢迎，请 <a href="../../login">登录</a></span>
-                    {% endif %}   
+                    {% endif %}     
+
                      <a href = "../../index" ><span>首页</span></a>
-	                    	  
+	                   	
                     </div>
-                </div>
+                    </div>            
+</div>
 <div class="container second">
 	<div class="questioninfo">
 

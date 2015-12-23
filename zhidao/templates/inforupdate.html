@@ -20,11 +20,11 @@
                     <div><a href="../../logout"><span>退出</span></a>
                     <a href="../../usercenter/information"><span>个人中心</span></a>
                      <a href="../../message/list"> <span>消息
-						{% if messages != 0 %}
-						<span>({{messages}})</span>
+						{% if unreadnumber != 0 %}
+						<span>({{unreadnumber}})</span>
 						{% endif %}
 	                    </span></a>
-                    </div>
+                    
                     {% else %} 
                     <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
                     <span>欢迎，请 <a href="../../login">登录</a></span>
@@ -33,6 +33,7 @@
                      <a href = "../../index" ><span>首页</span></a>
 	                   	
                     </div>
+                    </div>            
 </div>
 <div class="container-fluid">
 	<div class="top">
@@ -63,12 +64,9 @@
 			<div>{{field}}{{field.errors}}
 			</div>
 			{% endfor %}
-			<input class="btn btn-info btn-block"type="submit" value="提交">
+			<input class="btn btn-lg btn-info btn-block"type="submit" value="提交">
 		</form>
 	</div>
-		<div class="righttest">
-			
-		</div>
 	</div>
 </div>
 	

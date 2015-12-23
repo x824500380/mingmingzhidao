@@ -19,20 +19,21 @@
                     <span>{{ user }}</span>
                     <div><a href="../../logout"><span>退出</span></a>
                     <a href="../../usercenter/information"><span>个人中心</span></a>
-                    <a href="../message/list"> <span>消息
-						{% if messages != 0 %}
-						<span>({{messages}})</span>
+                     <a href="../../message/list"> <span>消息
+						{% if unreadnumber != 0 %}
+						<span>({{unreadnumber}})</span>
 						{% endif %}
-	                   </span></a>	
-                    </div>
+	                    </span></a>
+                    
                     {% else %} 
                     <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
                     <span>欢迎，请 <a href="../../login">登录</a></span>
                     {% endif %}     
-                    
-                     <a href = "../index" ><span>首页</span></a>
-	                   
+
+                     <a href = "../../index" ><span>首页</span></a>
+	                   	
                     </div>
+                    </div>            
 </div>
 <div class="container-fluid">
 	<div class="top">
@@ -59,7 +60,7 @@
 		<div class="wdinfo">
 		<form method = "POST" action="/changepwd">
 			{{changepwdform}}
-			<input class="btn btn-info btn-block"type="submit" value="提交" style="margin-top:4em;">
+			<input class="btn btn-lg btn-info btn-block"type="submit" value="提交" style="margin-top:4em;">
 		</form>
 	</div>
 		<div class="righttest">
