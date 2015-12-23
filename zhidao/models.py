@@ -119,3 +119,21 @@ class dbSpider:
             self.bestanswer.append(answer)
         else:
             self.answers.append(answer)
+class timtree:
+    def __init__(self):
+        self.timelist=[]
+        self.timetag=[]
+        self.dic={
+
+        }
+    def addnew(self,aim):
+        year = str(aim.Time)
+        if year in self.timelist:
+            self.timetag[self.timelist.index(year)]+=1
+            
+        else:
+            self.timelist.append(year)
+            self.timetag.append(1)
+    def getdic(self):
+        for item in self.timelist:
+            self.dic.setdefault(item,self.timetag[self.timelist.index(item)])

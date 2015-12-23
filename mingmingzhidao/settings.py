@@ -23,10 +23,11 @@ if debug:
 
     MYSQL_DB = 'mingmingzhidao'      
     MYSQL_USER = 'root'   
-    MYSQL_PASS = '123456'   
+    MYSQL_PASS = 'root'   
     MYSQL_HOST_M = '127.0.0.1'   
     MYSQL_HOST_S = '127.0.0.1'   
-    MYSQL_PORT = '3306'   
+    MYSQL_PORT = '3306' 
+    BUGTAG = True  
 else:   
 #SAE   
     import sae.const   
@@ -36,10 +37,11 @@ else:
     MYSQL_HOST_M = sae.const.MYSQL_HOST   
     MYSQL_HOST_S = sae.const.MYSQL_HOST_S   
     MYSQL_PORT = sae.const.MYSQL_PORT  
+    BUGTAG = False
 SECRET_KEY = '2f#b5hxfomseu)!qccmmmaxi0e(@rdrny9e&_9prg6#d6^^i*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = BUGTAG
 
 ALLOWED_HOSTS = ['*']
 

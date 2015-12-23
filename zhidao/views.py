@@ -218,4 +218,14 @@ def myanswers(request):
 	answerlist = answer.objects.filter(UserID = request.user)
 	return render_to_response('myanswers.html',{'answerlist':answerlist,'user':request.user})
 def timetree(request):
-	pass
+	questionlist = question.objects.filter(UserID = request.user)
+	answerlist = answer.objects.filter(UserID = request.user)
+	timelist = timtree()
+
+	for quest in questionlist:
+		timelist.addnew(quest)
+		
+	for answ in answerlist:
+		timelist.addnew(answ)
+	timelist.getdic()
+	return render_to_response('timetree.html',{'timelist':timelist,'user':request.user})
