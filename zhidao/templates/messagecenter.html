@@ -40,11 +40,15 @@
 	<div class="allmessages"></div>
 	{%for message in allmessage%}
 	<label>所有消息</label>
-		{%if message.about_question %}
+		{%if message.MessageType == 1 %}
 		<div><a href = '../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
 		<span>{{message.Time}}</span></a></div>
-	    {% else %}
+	    {% elif  message.MessageType == 2 %}
 	    <div><a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span><span>{{message.Time}}</span></a></div>
+	    {%elif message.MessageType == 3%}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>{{message.QuestionID.UserID.name}}回复了您</span></a></div>
+	    {%else%}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>欢迎来到明明知道:)</span></a></div>
 	    {% endif %}
 	 {%endfor%}
 	<div class="unread"></div>
@@ -54,11 +58,15 @@
 	{%endif%}
 	</label>
 		{%for message in unreadmessage%}
-		{%if message.about_question%}
-		<div><a href = '../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题：</span>
-		<span>{{message.AnswerID.Time}}</span></a></div>
-	    {% else %}
-	    <div><a href="../../{{message.ID}}/viewmessage"><span>的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a></div>
+		{%if message.MessageType == 1 %}
+		<div><a href = '../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
+		<span>{{message.Time}}</span></a></div>
+	    {% elif  message.MessageType == 2 %}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span><span>{{message.Time}}</span></a></div>
+	    {%elif message.MessageType == 3%}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>{{message.QuestionID.UserID.name}}回复了您</span></a></div>
+	    {%else%}
+	    <div><a href="../../{{message.ID}}/viewmessage"><span>欢迎来到明明知道:)</span></a></div>
 	    {% endif %}
 	    {% endfor %}
 </body>

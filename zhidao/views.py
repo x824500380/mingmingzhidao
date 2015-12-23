@@ -132,6 +132,12 @@ def register(request):
 		if  registerform.is_valid():
 			user = User.objects.create_user(name = registerform.cleaned_data['username'],email = registerform.cleaned_data['email'],password = registerform.cleaned_data['password2'])
 			user.save()
+			newmessage = Message(To_id = user.id,
+				From_id = None,
+				QuestionID = None,
+				AnswerID = None,
+				MessageType = 0)
+			newmessage.save()
 			return HttpResponseRedirect('../index')
 	else:
 		loginform = LoginForm()
@@ -218,8 +224,7 @@ def putanswer(request,questionID):
 				From_id = answertemp.UserID_id,
 				QuestionID = questiontemp,
 				AnswerID = answertemp,
-				about_question = True,
-				about_answer = False)
+				MessageType = 1)
 			newmessage.save()
 			url = '/'+str(questionID)+'/'+str(questiontemp.UserID_id)+'/detail'
 			return HttpResponseRedirect(url)
@@ -244,8 +249,7 @@ def isbestanswer(request,answerID):
 				From_id = questiontemp.UserID_id,
 				QuestionID = questiontemp,
 				AnswerID = bestanswer,
-				about_question = False,
-				about_answer = True)
+				MessageType = 2)
 	newmessage.save()
 	url = '/'+str(questionID)+'/'+str(questiontemp.UserID_id)+'/detail'
 	return HttpResponseRedirect(url)
@@ -259,7 +263,10 @@ def viewmessage(request,messageID):
 	message = Message.objects.get(ID = messageID)
 	message.is_view = True
 	message.save()
-	url = '/'+str(message.QuestionID_id)+'/'+str(message.QuestionID.UserID_id)+'/detail'
+	if message.MessageType == 0:
+		url = '/index'
+	else:
+		url = '/'+str(message.QuestionID_id)+'/'+str(message.QuestionID.UserID_id)+'/detail'
 	return HttpResponseRedirect(url)
 def timetree(request):
 	questionlist = question.objects.filter(UserID = request.user)
@@ -273,3 +280,22 @@ def timetree(request):
 		timelist.addnew(answ)
 	timelist.getdic()
 	return render_to_response('timetree.html',{'timelist':timelist,'user':request.user,'messages':messagenumber(request.user)})
+@csrf_exempt
+@login_required(login_url='/login')
+def exquestion(request,answerID):
+	if request.method == "POST":
+		description = request.POST['exquestion']
+		answertemp = answer.objects.get(ID = answerID)
+		newexquestion = ExQuestion(Description = description,
+			UserID = request.user,
+			AnswerID = answertemp)
+		newexquestion.save()
+		newmessage = Message(To_id = answertemp.UserID_id,
+			From_id = answertemp.QuestionID.UserID_id,
+			QuestionID = answertemp.QuestionID,
+			AnswerID = answertemp,
+			MessageType = 3)
+		newmessage.save()
+		url = '/'+str(answertemp.QuestionID_id)+'/'+str(answertemp.QuestionID.UserID_id)+'/detail'
+		return HttpResponseRedirect(url)
+	

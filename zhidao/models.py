@@ -82,12 +82,11 @@ class answer(models.Model):
 class Message(models.Model):
     ID = models.AutoField(primary_key = True)
     To = models.ForeignKey("User",related_name='To_id')
-    From = models.ForeignKey("User",related_name='From_id')
+    From = models.ForeignKey("User",related_name='From_id',blank = True,null = True)
     is_view = models.BooleanField(default = False)
-    QuestionID = models.ForeignKey("question")
-    AnswerID = models.ForeignKey("answer")
-    about_question = models.BooleanField()
-    about_answer = models.BooleanField()
+    QuestionID = models.ForeignKey("question",blank = True,null = True)
+    AnswerID = models.ForeignKey("answer",blank = True,null = True)
+    MessageType = models.IntegerField()
     Time = models.DateField(auto_now_add = True)
 class ExQuestion(models.Model):
     ID = models.AutoField(primary_key = True)

@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^(?P<answerID>(.+))/isbestanswer$','zhidao.views.isbestanswer'),
     url(r'^message/list$','zhidao.views.messagelist'),
     url(r'^(?P<messageID>(.+))/viewmessage$','zhidao.views.viewmessage'),
-    url(r'^usercenter/timetree$','zhidao.views.timetree')
+    url(r'^usercenter/timetree$','zhidao.views.timetree'),
+    url(r'^(?P<answerID>(.+))/exquestion$','zhidao.views.exquestion')
 ]
