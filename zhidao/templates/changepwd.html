@@ -12,29 +12,28 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	</head>
 <body style="background-color:rgb(211,212,205)">
-<div class=" searchinfo navbar-fixed-top row-fluid">
-                    <div class="span12">
-                         {% if user.is_authenticated %} 
-                    <span class="glyphicon glyphicon-user"></span>
-                    <span>{{ user }}</span>
-                    <div><a href="../../logout"><span>退出</span></a>
-                    <a href="../../usercenter/information"><span>个人中心</span></a>
-                     <a href="../../message/list"> <span>消息
+ <div class=" searchinfo navbar-fixed-top row-fluid">
+        <div class="container-fluid">
+            {% if user.is_authenticated %}
+            <div class="row-fluid"><span class="glyphicon glyphicon-user col-md-2">
+            	{{ user }}</span><a href="../../index" class="col-md-offset-9 col-md-1"><span class="linkindex">首页</span></a></div>
+            <div class="row-fluid"><a href="../../usercenter/information" ><span>个人中心</span></a>
+            
+            <a href="../../logout" ><span>退出</span></a>
+				<a href="../../message/list" class="col-md-offset-11"><span>消息
 						{% if messages != 0 %}
-						<span>({{messages}})</span>
-						{% endif %}
-	                    </span></a>
-                    
-                    {% else %} 
-                    <a href="../../login"><span class="glyphicon glyphicon-user"></span></a>
-                    <span>欢迎，请 <a href="../../login">登录</a></span>
-                    {% endif %}     
+						<span>({{messages}})</span> {% endif %}
+                    </span>
+                </a>
+                
+                {% else %}
+                <a href="../../allmessages"><span class="glyphicon glyphicon-user"></span></a>
+                <span>欢迎，请 <a href="../../allmessages">登录</a></span> 
 
-                     <a href = "../../index" ><span>首页</span></a>
-	                   	
-                    </div>
-                    </div>            
-</div>
+                <a href="../../index" ><span>首页</span></a>{% endif %}
+            </div>
+        </div>
+    </div>
 <div class="container-fluid">
 	<div class="top">
 		<div class="infoname">
