@@ -16,6 +16,7 @@
 	<script>
 	function show(tag){
 	 var light=document.getElementById(tag);
+
 	 var fade=document.getElementById('fade');
 	 light.style.display='block';
 	 fade.style.display='block';
@@ -27,7 +28,7 @@
 	 fade.style.display='none';
 	}
 	function over(tag){
-		document.getElementById(tag).innerHTML="追问";
+		document.getElementById(tag).innerHTML="回复";
 	}
 	function out(tag){
 		document.getElementById(tag).innerHTML="<strong class='glyphicon glyphicon-edit'></strong>";
@@ -74,13 +75,13 @@
 	{%if bestanswer%}
 		<div class="bestinfo">
 		<div>
-				{%if user == questionuser %}
-				<a  id="{{bestanswer.ID}}" onmouseover="over({{bestanswer.ID}})" onmouseout="out({{bestanswer.ID}})"   class="col-xs-offset-11 col-xs-1" href="javascript:void(0)" onclick="show('light')"><strong class="glyphicon glyphicon-edit"></strong></a>
-				<div id="light" class="white_content">
-      				<div class="close"><a href="javascript:void(0)" onclick="hide('light')"> 关闭</a></div>
+				{%if user == questionuser or user == bestanswer.UserID%}
+				<a  id="{{bestanswer.ID}}" onmouseover="over({{bestanswer.ID}})" onmouseout="out({{bestanswer.ID}})"   class="col-xs-offset-11 col-xs-1" href="javascript:void(0)" onclick="show('light{{bestanswer.ID}}')"><strong class="glyphicon glyphicon-edit"></strong></a>
+				<div id="light{{bestanswer.ID}}" class="white_content">
+      				<div class="close"><a href="javascript:void(0)" onclick="hide('light{{bestanswer.ID}}')"> 关闭</a></div>
       				<div class="con"> 
-      				<form method = "POST" action = "../../{{answer.ID}}/exquestion">
-      					<textarea rows="10" name="exquestion" class="exinput btn-block input input-lg"></textarea>
+      				<form method = "POST" action = "../../{{bestanswer.ID}}/exquestion">
+      					<textarea placeholder="你的看法" rows="10" name="exquestion" class="exinput btn-block input input-lg" required></textarea>
       					<input class="exbtn btn btn-lg btn-block btn-info" type="submit" value="提交"/>
       				</form>
       			  </div>
@@ -93,20 +94,25 @@
 				<span class="glyphicon glyphicon-user"></span>{{bestuser.name}}
 			</div>
 			<p>{{bestanswer.Content}}</p>
-			
+			<div>
+				{%for item in bestanswer_ex%}
+					<span class="glyphicon glyphicon-user"></span>{{item.UserID.name}}
+					<p>{{item.Description}}</p>
+				{%endfor%}
+			</div>
 		</div>
 	{%endif%}
-	{%for answer in otheranswer%}
+	{%for answer in answerlist%}
 		<div class="otherinfo">
 		
 			<div>
-				{%if user == questionuser %}
-				<a  id="{{answer.ID}}" onmouseover="over({{answer.ID}})" onmouseout="out({{answer.ID}})" class="col-xs-offset-11 col-xs-1" href="javascript:void(0)" onclick="show('light')"><strong class="glyphicon glyphicon-edit"></strong></a>
-				<div id="light" class="white_content">
-      				<div class="close"><a href="javascript:void(0)" onclick="hide('light')"> 关闭</a></div>
+				{%if user == questionuser or user.name == answer.Username%}
+				<a  id="{{answer.ID}}" onmouseover="over({{answer.ID}})" onmouseout="out({{answer.ID}})" class="col-xs-offset-11 col-xs-1" href="javascript:void(0)" onclick="show('light{{answer.ID}}')"><strong class="glyphicon glyphicon-edit"></strong></a>
+				<div id="light{{answer.ID}}" class="white_content">
+      				<div class="close"><a href="javascript:void(0)" onclick="hide('light{{answer.ID}}')"> 关闭</a></div>
       				<div class="con"> 
       				<form method = "POST" action = "../../{{answer.ID}}/exquestion">
-      					<textarea rows="10" name="exquestion" class="btn-block input input-lg"></textarea>
+      					<textarea rows="10" placeholder="你的看法" name="exquestion" class="btn-block input input-lg req" required></textarea>
       					<input class="exbtn btn btn-lg btn-block btn-info" type="submit" value="提交"/>
       				</form>
       			  </div>
@@ -115,7 +121,7 @@
 		        
 			</div>
 			<div>
-				<span class="glyphicon glyphicon-user"></span>{{answer.UserID.name}}
+				<span class="glyphicon glyphicon-user"></span>{{answer.Username}}
 				{%if not bestanswer%}
 				{% if user == questionuser%}
 				<a href = '../../../{{answer.ID}}/isbestanswer'><span class="glyphicon glyphicon-star-empty"></span></a>
@@ -124,7 +130,12 @@
 			</div>
 			<p>{{answer.Content}}</p>
 			<div>
-				
+				{% for item in answer.exquestions%}
+				<div>
+					<span class="glyphicon glyphicon-user"></span>{{item.UserID.name}}
+					<p>{{item.Description}}</p>
+				</div>
+				{%endfor%}
 			</div>
 			
 		</div>

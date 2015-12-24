@@ -116,7 +116,7 @@ class InformationForm(forms.Form):
     birthday = forms.DateField(widget=forms.TextInput(
         attrs={'class':'input input-lg btn-block', }),label=u"生日",required=False,input_formats=['%Y-%m-%d',],error_messages={'invalid':u'请输入正确格式的日期2015-01-10'})
     address = forms.CharField(label=u"地址",required=False,max_length=100,widget=forms.TextInput(
-        attrs={'class':'input input-lg btn-block','placeholder': u'地址'}
+        attrs={'class':'input input-lg btn-block',}
     ),
 )
     information = forms.CharField(label=u"个人简介",required=False,max_length=400,widget=forms.Textarea(

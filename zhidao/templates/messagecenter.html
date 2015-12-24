@@ -44,8 +44,11 @@
  
 
 
-
     <div class="main">
+
+             <div><a href="../../set/allmessage"><span>全部置为已读</span></a>
+             <a href="../../delete/allmessage"><span>清空所有消息</span></a>
+             </div>
 			<ul id="myTab" class="nav nav-tabs">
 			   <li class="active">
 			      <a href="#allmessages" data-toggle="tab">
@@ -56,6 +59,9 @@
         	({{unreadnumber}}){% endif %}</a></li>
 			   
 			</ul>
+             <div><a href="../../set/allmessage"><span>全部置为已读</span></a>
+             <a href="../../delete/allmessage"><span>清空所有消息</span></a>
+             </div>
 			<div id="myTabContent" class="tab-content">
 			   <div class="tab-pane fade in active " id="allmessages">
 			      <div class=" container-fluid">
@@ -65,28 +71,27 @@
     
         <a href='../../{{message.ID}}/viewmessage'>
             <span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
-           
         </a>
-    
+        <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {% elif message.MessageType == 2 %}
     
     	<a href="../../{{message.ID}}/viewmessage">
     		<span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span>
     		
     	</a>
-    
+        <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {%elif message.MessageType == 3%}
     
     	<a href="../../{{message.ID}}/viewmessage">
     		<span>{{message.QuestionID.UserID.name}}回复了您</span>
     	</a>
-    
+        <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {%else%}
    
     	<a href="../../{{message.ID}}/viewmessage">
     		<span>欢迎来到明明知道:)</span>
     	</a>
-    
+        <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {% endif %} </h4><span class="col-md-4">{{message.Time}}</span><hr class="col-md-12"></li>{%empty%}<h3>您还没有收到消息哦：)</h3>{%endfor%}</ul></div>
 			   
 				</div>
@@ -100,12 +105,21 @@
     {%for message in unreadmessage%} <li class="col-md-12"><h4 class="col-md-8">{%if message.MessageType == 1 %}
     <a href='../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
 		</a>
+        <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+        <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
+        
     {% elif message.MessageType == 2 %}
-    <a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a>
+    <a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a><a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+    <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
+    
     {%elif message.MessageType == 3%}
     <a href="../../{{message.ID}}/viewmessage"><span>{{message.QuestionID.UserID.name}}回复了您</span></a>
+     <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+    <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {%else%}
     <a href="../../{{message.ID}}/viewmessage"><span>欢迎来到明明知道:)</span></a>
+    <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+    <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
      {% endif %} </h4><span class="col-md-4">{{message.Time}}</span><hr class="col-md-12"></li>{%empty%}<h3>您没有新的消息哦：)</h3>{%endfor%}</ul></div>
     </div>
 					</div>

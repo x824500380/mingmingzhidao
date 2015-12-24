@@ -486,17 +486,37 @@
 			<div class="containerr">
        
         <div class="mmmm">
-            <ul class="cbp_tmtimeline">{% for key,value in timelist.dic.items %}
+            <ul class="cbp_tmtimeline">{% for key,value in timelist.dic1.items %}
                 <li>
                     <time class="cbp_tmtime">
-                        <span>lala</span> <span>{{key}}</span></time>
+                    <span>{{key}}</span></time>
                     <div class="cbp_tmicon cbp_tmicon-phone">
                     </div>
                     <div class="cbp_tmlabel">
                         <h2>
-                            {{value}}</h2>
+                            {{value}}个活动</h2>
                         <p>
-                       {{value}}</p>
+                        <div>
+                            <ul>
+                                {%for time,questions in timelist.dic2.items%}
+                                {% if time == key%}
+                                {% for item in questions%}
+                                <li><a href="../../{{item.ID}}/{{item.UserID_id}}/detail"><p>你提出了这个问题：{{item.Title}}</p></a></li>
+                                {%endfor%}
+                                {%endif%}
+                                {%endfor%}
+                            </ul>
+                        </div>
+                        <ul>
+                                {%for time,answers in timelist.dic3.items%}
+                                {% if time == key%}
+                                {% for item in questions%}
+                                <li><a href="../../{{item.QuestionID.ID}}/{{item.QuestionID.UserID_id}}/detail"><p>你回答了{{item.UserID.name}}的问题</p></a></li>
+                                {%endfor%}
+                                {%endif%}
+                                {%endfor%}
+                            </ul>
+                       </p>
                     </div>
                 </li>
                 {%endfor%}

@@ -100,7 +100,8 @@ def search(request,key,wd):
 		Formalquestion = dbSpider(Q.Title,'#',Q.Description,Q.UserID.id,Q.ID)
 		Aorial=answer.objects.filter(QuestionID_id=Q.ID)#获得对应问题的答案
 		for item in Aorial:
-			Formalanswer = Answer(item.ID,item.Content,item.UserID.name,item.is_best)
+			exquestions = ExQuestion.objects.filter(AnswerID = item)
+			Formalanswer = Answer(item.ID,item.Content,item.UserID.name,item.is_best,exquestions)
 			Formalquestion.handleanswer(Formalanswer)
 		dbQuestionList.append(Formalquestion)
 	keynext=int(key)+1
@@ -195,23 +196,28 @@ def putquestion(request):
 def questiondetail(request,questionID,userID):
 	user = User.objects.get(id = userID)
 	questiontemp = question.objects.get(ID = questionID)
-	
 	try:
 		bestanswer=answer.objects.get(is_best=1,QuestionID_id = questionID)
 		bestuser=User.objects.get(id = bestanswer.UserID_id)
+		bestanswer_ex = ExQuestion.objects.filter(AnswerID = bestanswer)
 	except:
-		bestanswer=[]
-		bestuser=[]
+		bestanswer = []
+		bestuser = []
+		bestanswer_ex = []
 	try:
 		otheranswer=answer.objects.filter(is_best=0,QuestionID_id = questionID)
-		otheruser=[]
-		for Answer in otheranswer:
-			otheruser.append(User.objects.get(id = Answer.UserID_id))
+		answerlist = []
+		for item in otheranswer:
+			exquestions = ExQuestion.objects.filter(AnswerID = item)
+			answertemp = Answer(item.ID,item.Content,item.UserID.name,item.is_best,exquestions)
+			answerlist.append(answertemp)
 	except:
-		otheranswer=[]
-		otheruser=[]
+		answerlist = []
 	answerform = AnswerForm()
-	return render_to_response('questiondetail.html',{'form':answerform,'messages':messagenumber(request.user),"user":request.user,"bestuser":bestuser,"otheruser":otheruser,'question':questiontemp,'questionuser':user,"bestanswer":bestanswer,"otheranswer":otheranswer})
+	return render_to_response('questiondetail.html',{'form':answerform,'messages':messagenumber(request.user),"user":request.user,
+		"bestanswer":bestanswer,"bestuser":bestuser,"bestanswer_ex":bestanswer_ex,
+		"question":questiontemp,"questionuser":user,
+		"answerlist":answerlist})
 @csrf_exempt
 @login_required(login_url='/login')
 def putanswer(request,questionID):
@@ -268,6 +274,22 @@ def viewmessage(request,messageID):
 	else:
 		url = '/'+str(message.QuestionID_id)+'/'+str(message.QuestionID.UserID_id)+'/detail'
 	return HttpResponseRedirect(url)
+def setmessage(request,messageID):
+	message = Message.objects.get(ID = messageID)
+	message.is_view = True
+	message.save()
+	return HttpResponseRedirect('/message/list')
+def setallmessage(request):
+    Message.objects.filter(is_view = False).update(is_view = True)
+    return HttpResponseRedirect('/message/list')
+def deletemessage(request,messageID):
+	message = Message.objects.get(ID = messageID)
+	message.delete()
+	return HttpResponseRedirect('/message/list')
+def deleteallmessage(request):
+	messages = Message.objects.all()
+	messages.delete()
+	return HttpResponseRedirect('/message/list')
 def timetree(request):
 	questionlist = question.objects.filter(UserID = request.user)
 	answerlist = answer.objects.filter(UserID = request.user)

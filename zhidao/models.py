@@ -119,11 +119,12 @@ class spider:
     def SpiderAnswer(self,answer,numb):
         self.list[numb].answer=answer
 class Answer:
-    def __init__(self,ID,Content,Username,is_best):
+    def __init__(self,ID,Content,Username,is_best,exquestions):
         self.ID = ID
         self.Content = Content
         self.Username = Username
         self.is_best = is_best
+        self.exquestions = exquestions
 class dbSpider:
     def __init__(self,title,link,question,userID,ID):
         self.ID=ID
@@ -138,12 +139,18 @@ class dbSpider:
             self.bestanswer.append(answer)
         else:
             self.answers.append(answer)
+
 class timtree:
     def __init__(self):
         self.timelist=[]
         self.timetag=[]
-        self.dic={
-
+        self.questiontag=[]
+        self.answertag=[]
+        self.dic1={
+        }
+        self.dic2={
+        }
+        self.dic3={
         }
     def addnew(self,aim):
         year = str(aim.Time)
@@ -153,6 +160,10 @@ class timtree:
         else:
             self.timelist.append(year)
             self.timetag.append(1)
+            self.questiontag.append(question.objects.filter(Time=aim.Time,UserID=aim.UserID))
+            self.answertag.append(answer.objects.filter(Time=aim.Time,UserID=aim.UserID))
     def getdic(self):
         for item in self.timelist:
-            self.dic.setdefault(item,self.timetag[self.timelist.index(item)])
+            self.dic1.setdefault(item,self.timetag[self.timelist.index(item)])
+            self.dic2.setdefault(item,self.questiontag[self.timelist.index(item)])
+            self.dic3.setdefault(item,self.answertag[self.timelist.index(item)])
