@@ -17,9 +17,10 @@
                          {% if user.is_authenticated %} 
                     <span class="glyphicon glyphicon-user"></span>
                     <span>{{ user }}</span>
-                    <div><a href="../../logout"><span>退出</span></a>
-                    <a href="../../usercenter/information"><span>个人中心</span></a>
-                     <a href="../../message/list"> <span>消息
+                    <div><a href="../../logout"class="linkindex"><span class="glyphicon glyphicon-off">退出</span></a>
+                    <a href = "../../index" ><span class="glyphicon glyphicon-home">首页</span></a>
+                    
+                     <a href="../../message/list"> <span class="glyphicon glyphicon-volume-up">消息
 						{% if messages != 0 %}
 						<span>({{messages}})</span>
 						{% endif %}
@@ -30,7 +31,7 @@
                     <span>欢迎，请 <a href="../../login">登录</a></span>
                     {% endif %}     
 
-                     <a href = "../../index" ><span>首页</span></a>
+                     
 	                   	
                     </div>
                     </div>            
@@ -38,8 +39,8 @@
 <div class="container-fluid">
 	<div class="top">
 		<div class="infoname">
-		<span class="glyphicon glyphicon-user"></span>
-		<p style="font-size:20px;">{{user.name}}</p>
+		<span class="glyphicon glyphicon-cog"></span>
+		<p style="font-size:20px;">个人中心</p>
 		</div>
 	</div>
 	<div class="leftside col-md-2">

@@ -19,36 +19,34 @@
 	</head>
 <body style="background-color:rgb(211,212,205)">
     <div class=" searchinfo navbar-fixed-top row-fluid">
-        <div class="container-fluid">
+      
             {% if user.is_authenticated %}
-            <div class="row-fluid"><span class="glyphicon glyphicon-user col-md-2">
-            	{{ user }}</span><a href="../../index" class="col-md-offset-9 col-md-1"><span class="linkindex">首页</span></a></div>
-            <div class="row-fluid"><a href="../../usercenter/information" ><span>个人中心</span></a>
+            <div><span class="glyphicon glyphicon-user">
+            	{{ user }}</span></div>
             
-            <a href="../../logout" ><span>退出</span></a>
-				<a href="../../message/list" class="col-md-offset-11"><span>消息
-						{% if unreadnumber != 0 %}
-						<span>({{unreadnumber}})</span> {% endif %}
+            <a href="../../index" ><span class="glyphicon glyphicon-home">首页</span></a>
+            <a href="../../usercenter/information" ><span class="glyphicon glyphicon-cog">个人中心</span></a>
+            <a href="../../message/list" ><span class="glyphicon glyphicon-volume-up">消息
+                        {% if unreadnumber != 0 %}
+                        <span>({{unreadnumber}})</span> {% endif %}
                     </span>
-                </a>
+            </a>
+            <a href="../../logout" class="linkindex"><span class="glyphicon glyphicon-off">退出</span></a>
+			
                 
                 {% else %}
-                <a href="../../allmessages"><span class="glyphicon glyphicon-user"></span></a>
-                <span>欢迎，请 <a href="../../allmessages">登录</a></span> 
+            <a href="../../allmessages"><span class="glyphicon glyphicon-user"></span></a>
+             <span>欢迎，请 <a href="../../allmessages">登录</a></span> 
 
-                <a href="../../index" ><span>首页</span></a>{% endif %}
-            </div>
-        </div>
+            <a href="../../index" ><span class="glyphicon glyphicon-home">首页</span></a>{% endif %}
+            
+        
     </div>
     
  
 
 
     <div class="main">
-
-             <div><a href="../../set/allmessage"><span>全部置为已读</span></a>
-             <a href="../../delete/allmessage"><span>清空所有消息</span></a>
-             </div>
 			<ul id="myTab" class="nav nav-tabs">
 			   <li class="active">
 			      <a href="#allmessages" data-toggle="tab">
@@ -56,12 +54,17 @@
 			      </a>
 			   </li>
 			   <li><a href="#unread" data-toggle="tab">未读消息{% if unreadnumber != 0 %}
-        	({{unreadnumber}}){% endif %}</a></li>
-			   
+        	       ({{unreadnumber}}){% endif %}</a>
+               </li>
+               <div class="col-md-offset-9">
+                <a href="../../set/allmessage"><button class="btn btn-xs btn-success msbtn">全部置为已读</button></a>
+               
+               
+                <a href="../../delete/allmessage"><button class="btn btn-xs btn-warning msbtn" >清空所有消息</button></a>
+              
+                </div>
 			</ul>
-             <div><a href="../../set/allmessage"><span>全部置为已读</span></a>
-             <a href="../../delete/allmessage"><span>清空所有消息</span></a>
-             </div>
+            
 			<div id="myTabContent" class="tab-content">
 			   <div class="tab-pane fade in active " id="allmessages">
 			      <div class=" container-fluid">
@@ -92,7 +95,7 @@
     		<span>欢迎来到明明知道:)</span>
     	</a>
         <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
-    {% endif %} </h4><span class="col-md-4">{{message.Time}}</span><hr class="col-md-12"></li>{%empty%}<h3>您还没有收到消息哦：)</h3>{%endfor%}</ul></div>
+    {% endif %} </h4><span class="col-md-3">{{message.Time}}</span><hr class="col-md-12"></li>{%empty%}<h3>您还没有收到消息哦：)</h3>{%endfor%}</ul></div>
 			   
 				</div>
 				 
@@ -105,20 +108,20 @@
     {%for message in unreadmessage%} <li class="col-md-12"><h4 class="col-md-8">{%if message.MessageType == 1 %}
     <a href='../../{{message.ID}}/viewmessage'><span>{{message.AnswerID.UserID.name}}回答了你的问题</span>
 		</a>
-        <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+        <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-ok"></span></a>
         <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
         
     {% elif message.MessageType == 2 %}
-    <a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a><a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+    <a href="../../{{message.ID}}/viewmessage"><span>你的回答被{{message.QuestionID.UserID.name}}采纳为最佳答案</span></a><a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-ok"></span></a>
     <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     
     {%elif message.MessageType == 3%}
     <a href="../../{{message.ID}}/viewmessage"><span>{{message.QuestionID.UserID.name}}回复了您</span></a>
-     <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+     <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-ok"></span></a>
     <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
     {%else%}
     <a href="../../{{message.ID}}/viewmessage"><span>欢迎来到明明知道:)</span></a>
-    <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-envelope"></span></a>
+    <a href="../../{{message.ID}}/setmessage"><span class="glyphicon glyphicon-ok"></span></a>
     <a href="../../{{message.ID}}/delete/message"><span class="glyphicon glyphicon-remove"></span></a>
      {% endif %} </h4><span class="col-md-4">{{message.Time}}</span><hr class="col-md-12"></li>{%empty%}<h3>您没有新的消息哦：)</h3>{%endfor%}</ul></div>
     </div>

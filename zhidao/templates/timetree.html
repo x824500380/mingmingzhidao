@@ -35,18 +35,20 @@
       
        .timetree  a
         {
-            color: #f0f0f0;
+            color: rgb(255,253,255);
             text-decoration: none;
+            font-size: 2.8ex;
         }
         
        .timetree  a:hover
         {
             color: #000;
+            font-size: 3.0ex;
         }
         
          .mmmm,  .containerr > header
         {
-            width: 90%;
+            width: 100%;
             max-width: 69em;
             margin: 0 auto;
             padding: 0 1.875em 3.125em 1.875em;
@@ -229,6 +231,7 @@
         {
             margin: 30px 0 0 0;
             padding: 0;
+
             list-style: none;
             position: relative;
         }
@@ -239,9 +242,9 @@
             content: '';
             position: absolute;
             top: 0;
-            bottom: 0;
+            bottom: 10em;
             width: 10px;
-            background: #afdcf8;
+            background: #007cf0;
             left: 20%;
             margin-left: -10px;
         }
@@ -345,9 +348,9 @@
             -webkit-font-smoothing: antialiased;
             position: absolute;
             color: #fff;
-            background: #46a4da;
+            background: #46a4da;/*心心*/
             border-radius: 50%;
-            box-shadow: 0 0 0 8px #afdcf8;
+            box-shadow: 0 0 0 8px #afdcf8;/**圈圈**/
             text-align: center;
             left: 20%;
             top: 0;
@@ -442,9 +445,10 @@
                          {% if user.is_authenticated %} 
                     <span class="glyphicon glyphicon-user"></span>
                     <span>{{ user }}</span>
-                    <div><a href="../../logout"><span>退出</span></a>
-                    <a href="../../usercenter/information"><span>个人中心</span></a>
-                     <a href="../../message/list"> <span>消息
+                    <div><a href="../../logout"class="linkindex"><span class="glyphicon glyphicon-off">退出</span></a> 
+                    <a href = "../../index" ><span  class="glyphicon glyphicon-home">首页</span></a>
+                   
+                     <a href="../../message/list"> <span class="glyphicon glyphicon-volume-up">消息
                         {% if messages != 0 %}
                         <span>({{messages}})</span>
                         {% endif %}
@@ -455,7 +459,7 @@
                     <span>欢迎，请 <a href="../../login">登录</a></span>
                     {% endif %}     
 
-                     <a href = "../../index" ><span>首页</span></a>
+                    
                         
                     </div>
                     </div>            
@@ -463,8 +467,8 @@
 <div class="container-fluid">
 	<div class="top">
 		<div class="infoname">
-		<span class="glyphicon glyphicon-user"></span>
-		<p style="font-size:20px;">{{user.name}}</p>
+		<span class="glyphicon glyphicon-cog"></span>
+        <p style="font-size:20px;">个人中心</p>
 		</div>
 	</div>
 	<div class="leftside col-md-2">
@@ -486,7 +490,8 @@
 			<div class="containerr">
        
         <div class="mmmm">
-            <ul class="cbp_tmtimeline">{% for key,value in timelist.dic1.items %}
+            <ul class="cbp_tmtimeline">
+                        {% for key,value in timelist.dic1.items %}
                 <li>
                     <time class="cbp_tmtime">
                     <span>{{key}}</span></time>
@@ -510,7 +515,7 @@
                         <ul>
                                 {%for time,answers in timelist.dic3.items%}
                                 {% if time == key%}
-                                {% for item in questions%}
+                                {% for item in answers%}
                                 <li><a href="../../{{item.QuestionID.ID}}/{{item.QuestionID.UserID_id}}/detail"><p>你回答了{{item.UserID.name}}的问题</p></a></li>
                                 {%endfor%}
                                 {%endif%}
@@ -520,7 +525,25 @@
                     </div>
                 </li>
                 {%endfor%}
-            </ul>
+                <li>
+                    <time class="cbp_tmtime">
+                    <span>{{today}}2015-12-24
+                    </span></time>
+                    <div class="cbp_tmicon cbp_tmicon-phone">
+
+                    </div>
+                    <div class="cbp_tmlabel">
+                        <h2>
+                            明明新生！
+                        </h2>
+                        <p>
+                        <h3 style="color:rgb(220,94,143)">亲爱的{{user.name}},欢迎来到明明知道：）</h3>
+                       
+                       </p>
+                    </div>
+            </li>
+
+            
         </div>
     </div>
 		
